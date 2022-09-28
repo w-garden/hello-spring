@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security.xsd
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="customAccessDenied" class="net.daum.security.CustomAccessDeniedHandler"/>
+	<!-- CustomAccessDeniedHandler 클래스의 빈아이디 객체 customAccessDenied 생성. 위의 문장을 자바 코드로 표현하면
+	CustomAccessDeniedHandler customAccessDenied = new CustomAccessDeniedHandler(); 와 같은 기능이다. bean 단위가 자바에서는 하나의
+	클래스 단위이다. -->
+
+	<security:http> <!-- 스프링 시큐티키가 http에서 알수있게 하는 시작 지점 설정-->
+		<security:intercept-url pattern="/sample/all" access="permitAll"/>
+		<!-- pattern 속성값에 지정한 매핑주소에 접근할 때 스프링의 시큐리티 인터셉터를 이용해서 
+		데이터를 가로챈 다음 access 속성에 지정한 권한범위를 체크한다. -->
+		<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')"/>
+		<!-- access 속성에 설정한 ROLE_MEMBER 권한범위는 로그인 한 사용자만 접근가능하다 -->
+		<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
+		<!-- 로그인한 사용자 중에서 관리자 권한을 가진 사용자만이 접근할 수 있다 -->
+		
+		
+		<!--<security:access-denied-handler error-page="/accessError"/>
+		 403접근 금지 에러가 발생했을 때 accessError 매핑주소가 실행되게 한다 -->
+		
+		<security:access-denied-handler ref="customAccessDenied"/>
+		<!--  403 접근 금지 에러가 발생하면 빈아이디 customAccessDenied 빈아이디를 호출한다. -->
+		
+		<!--<security:form-login/>  시큐리티 폼 로그인 설정. 스프링 시큐리티 자체 폼 로그인이 실행. -->
+		
+		<security:form-login login-page="/customLogin"/>
+		<!-- 커스텀 로그인 페이지로 이동하는 customLogin 매핑주소 등록.
+		login-page 속성으로 해당 매핑주소로 이동하는 방식은 get 방식 -->
+	</security:http>
+		
+	<security:authentication-manager> <!-- 스프링 시큐리티가 동작하기 위해서는 authentication-manager 인증관리자  설정 -->
+		<security:authentication-provider> <!-- 스프링 시큐리티 인증제공자 -->
+			<security:user-service>
+				<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
+            <!-- 아이디가 member, 비번이 member인 사용자는 로그인 인증 처리를 한다. {noop}는 비번을 인코딩 즉 암호화 처리 없이 사용한다 -->
+            
+            	<security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER, ROLE_ADMIN"/>
+            	<!-- admin, 비번이 admin인 사용자는 /sample/member와 /sample/admin 모두에 접근가능하다 -->
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+		
+	
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 이 파일의 역할은 스프링 컨트롤러를 통한 뷰페이지 영역이다. 그러므로 뷰페이지 경로인 뷰리졸브 설정과 뷰페이지 확장자인 .jsp,그리고
+	HTML,JAVASCRIPT,jQuery,이미지 등 사이트 개발에 필요한 리소스 자원이 들어가는 경로와 컨트롤러 클래스가 들어가는 풀패키지 경로가 설정되어 있다. -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven /> <!-- 스프링 컨트롤러 클래스 선언시 애노테이션을 이용해서 작성할 수 있다는 것은 선언하는 의미이다. -->
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<!-- 개발툴 가상경로가 src/main/webapp/resources 이고, 이 경로에는 html,css,javascript,jQuery,ajax,이미지 ,sql 등 관련파일이
+	들어가 곳이다. -->
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<!-- 뷰리졸브 경로 즉 뷰페이지 경로 -->
+		<beans:property name="suffix" value=".jsp" /> <!-- 뷰페이지 확장자를 .jsp -->
+	</beans:bean>
+	
+	<context:component-scan base-package="net.daum.controller" />	
+	<!-- 위의 패키지 경로는 스프링 컨트롤러 클래스가 들어가는 경로. 이 패키지 경로에 등록된 스프링 컨트롤러 클래스를 자동으로 찾아서(오토스캔) 스프링에서
+	인식하게 해준다. -->
+	
+	<!-- 스프링 이진파일 업로드 API설정, 첨부파일을 처리하는 빈 ID설정 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+	
+	</beans:bean>
+</beans:beans>
+
+
+
+
+
+
+
