@@ -3,6 +3,7 @@ package net.daum.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class CommonController {
@@ -32,5 +33,15 @@ public class CommonController {
 		if(logout != null) {
 			model.addAttribute("logout", "LogOut !!"); //logout 키이름에 값 저장
 		}
+	}//customLogin 매핑주소
+	
+	
+	@GetMapping("/customLogout") //로그아웃시 get으로 접근하는 매핑주소를 처리.
+	public void logoutGet() {
+		
+	}
+	@PostMapping("/customLogout") // 매핑주소가 같아도 메서드 방식이 다르면 사용가능 post 방식
+	public void logoutPost() {
+		
 	}
 }

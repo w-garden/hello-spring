@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member"> <!-- mybatis에서 쿼리문을 다루는 태그는 매퍼이다. 매퍼 네임스페이스 속성명을 Member로 설정함. -->
+
+ 
+</mapper>

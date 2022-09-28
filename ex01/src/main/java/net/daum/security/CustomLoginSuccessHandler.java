@@ -8,11 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.security.authentication.jaas.AuthorityGranter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-public class CustomLoginSuccess implements AuthenticationSuccessHandler {
+public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -26,6 +25,8 @@ public class CustomLoginSuccess implements AuthenticationSuccessHandler {
 			roleNames.add(authority.getAuthority());
 		});//로그인한 사용자에 부여한 권한을 출력
 		
+		 System.out.println("ROLE NAMES : " + roleNames); // 사용자 권한을 출력
+		 
 		if(roleNames.contains("ROLE_ADMIN")) {//
 			response.sendRedirect("/sample/admin");
 			return;
