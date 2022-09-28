@@ -24,8 +24,17 @@ public class CustomLoginSuccess implements AuthenticationSuccessHandler {
 		
 		auth.getAuthorities().forEach(authority -> {
 			roleNames.add(authority.getAuthority());
-		});//로그인한 사용자에 부여한 권한을 
+		});//로그인한 사용자에 부여한 권한을 출력
 		
-	}
+		if(roleNames.contains("ROLE_ADMIN")) {//
+			response.sendRedirect("/sample/admin");
+			return;
+		}
+		if(roleNames.contains("ROLE_MEMBER")) {
+			response.sendRedirect("/sample/member");
+			return;
+		}
+			response.sendRedirect("/");
+		}
 
 }
