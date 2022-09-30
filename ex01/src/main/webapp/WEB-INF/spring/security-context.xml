@@ -14,6 +14,18 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
      
      <bean id="customLoginSuccess" class="net.daum.security.CustomLoginSuccessHandler" />
      <!-- 로그인 성공시 실행됨. -->
+       <!-- <bean id="customPasswordEncoder" class="net.daum.security.CustomNoOpPasswordEncoder"/>
+   			customPasswordEncoder 빈아이디 객체를 생성 -->
+     
+     
+     <bean id="bcryptPasswordEncoder"
+     class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+     <!-- 1. 스프링 시큐리티에서 제공되는  BcryptPasswordEncoder 클래스를 이용해서 패스워드를 암초촤 처리한다
+     	  2. bcrypt는 패스워드를 저장하는 용도로 설계된 것으로 특정 문자열을 암호화시킨다. 체크하는 쪽에서는 암호화 된 
+     	     패스워드인지만 확인하고 다시 원래 암호 원문으로 되돌리지는 못한다.(복호화인 디코드가 안된다.)
+     	  3. BCryptPasswordEncoder는 스프링시큐리티 API 안에 포함되어 있다.
+     -->
+     	
     
    <security:http> <!-- 스프링 시큐리티가 http에서 알수 있게 하는 시작 지점 설정 -->
        
@@ -54,6 +66,21 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
          
        </security:user-service>
      </security:authentication-provider>
+   </security:authentication-manager>
+   
+   
+   <security:authentication-manager> <!-- 시큐리티 인증 관리자 -->
+   	<security:authentication-provider> <!-- 인증 제공자 -->
+   		<security:jdbc-user-service data-source-ref="dataSource"/> 
+   		<!-- root-context.xml 의 빈아이디 dataSource를 호출해서 오라클을 연결 -->
+   		
+   			<!--<security:password-encoder ref="customPasswordEncoder"/>
+   			 빈아이디 customPasswordEncoder 를 호출하면서 비번을 암호화 -->
+   			 
+   			 <security:password-encoder ref="bcryptPasswordEncoder"/>
+   			 <!--  빈아이디 bcryptPasswordEncoder 를 호출하면서 비번을 암호화 -->
+   	</security:authentication-provider>
+   
    </security:authentication-manager>
 </beans>
 

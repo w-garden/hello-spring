@@ -6,9 +6,9 @@
 </head>
 <body>
 <h1>
-	Hello 시큐리티!  
+	Hello Security!
 </h1>
-<h2>한글안깨지게 실행!</h2>
+<h3>헬로우 시큐리티! </h3>
 <P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>

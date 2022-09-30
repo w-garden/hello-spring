@@ -22,8 +22,6 @@
 	   <aop:aspectj-autoproxy/>
 	   
 	   
-	   
-	   
       <!-- 스프링 api로 오라클 연결(스프링 jdbc) -->
 	  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	     <property name="driverClassName" value="oracle.jdbc.OracleDriver" />
