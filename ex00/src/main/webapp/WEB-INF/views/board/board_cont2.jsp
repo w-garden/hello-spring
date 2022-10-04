@@ -100,7 +100,7 @@
 		var result="";
 		
 		$(data).each(function(){ //each()함수로반복
-			result += "<li data-rno='"+this.rno+"' class='replyLi'>"+this.rno+": <span class='con' style='color:blue; font-weight:bold;'>"+
+			result += "<li data-rno='"+this.rno+"' clddass='replyLi'>"+this.rno+": <span class='con' style='color:blue; font-weight:bold;'>"+
 			this.replytext + "</span>" + "<button>댓글수정</button></li><br>"
 		});
 		$('#replies').html(result); //해당영역에 html() 함수로 문자와 태그를 함께 변경 적용.

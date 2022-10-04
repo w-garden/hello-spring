@@ -5,6 +5,11 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
   
   <configuration>
-     
+     <typeAliases>
+      
+       <typeAlias type="net.daum.vo.MemberVO" alias="member"/>
+       <typeAlias type="net.daum.vo.AuthVO" alias="authvo"/>
+       
+     </typeAliases>
   </configuration>
   

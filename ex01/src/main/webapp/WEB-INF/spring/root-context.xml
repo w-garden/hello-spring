@@ -18,9 +18,8 @@
 	     ORM mybatis적용, 모델 DAO설정  까지 이다. 스프링 컨트롤러를 통한 화면에 보여지는 영역인 뷰부분은 없다.(컨트롤과 뷰 설정부분은 없다.)
 	   -->
 	   
-	   <!-- AOP 자동 프록시 설정 -->
-	   <aop:aspectj-autoproxy/>
-	   
+	  <!-- AOP 자동 프록시 설정  -->
+	  <aop:aspectj-autoproxy />
 	   
       <!-- 스프링 api로 오라클 연결(스프링 jdbc) -->
 	  <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -42,19 +41,15 @@
 	   
 	   <property name="mapperLocations" value="classpath:net/daum/mappers/*/*.xml" />
 	   <!-- 쿼리문을 수행하는 mybatis 매퍼태그 파일명이 들어가는 경로 -->
-	  </bean>	  
+	  </bean>	
 	  
-	  
-	  <!-- 트랜잭션 관리자(매니저) 설정 -->
+	  <!-- 트랜잭션 관리자(매니져) 설정 -->
 	  <bean id="transactionManager"
 	  class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	  <property name="dataSource" ref="dataSource"/> <!-- setter()를 통한 DI 즉 의존성을 주입하고 ref 빈아이디 dataSource를 호출하면서
-	  트랜잭션이 반영  -->
-	  </bean>
-	  
-	  <tx:annotation-driven/> <!-- 트랜잭션 설정 애너테이션 -->
-
-	  
+	    <property name="dataSource" ref="dataSource" /> <!-- setter()를 통한 DI 즉 의존성을 주입하고 ref 빈아이디 dataSource
+	    를 호출하면서 트랜잭션이 반영 -->
+	  </bean>  
+	  <tx:annotation-driven /> <!-- 트랜잭션 설정 애너테이션 -->
 	  
 	  <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 	   <!-- clearCache는 임시메모리 캐시를 비워서 DB연결을 해제 -->
@@ -71,37 +66,9 @@
            3. 스프리의 AOP를 통한 트랜잭션 적용 부분이다.그러면 항상 사이트의 데이터 불일치 현상을 제거해서 신뢰도를 올릴 수 있다.
        -->
        <context:component-scan base-package="net.daum.service" />
-       
-       
-       <!-- aop설정 => Aop를 xml 방식으로 설정 -->
-       <aop:config></aop:config>
               
+       <!-- aop설정 => Aop를 xml방식으로 설정 -->
+       <aop:config />       
 </beans>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

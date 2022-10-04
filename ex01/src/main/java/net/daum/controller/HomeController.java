@@ -21,9 +21,14 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	/**
+	 * Simply selects the home view to render by returning its name.
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model, HttpServletResponse response) {
+	public String home(Locale locale, Model model,HttpServletResponse response) {
 		response.setContentType("text/html;charset=UTF-8");
+		//브라우저에 출력되는 문자/태그,언어코딩 타입을 설정
+		
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
@@ -31,7 +36,8 @@ public class HomeController {
 		
 		String formattedDate = dateFormat.format(date);
 		
-		model.addAttribute("serverTime", formattedDate ); //home.jsp에서 ${serverTime} El에서 키이름 serverTime을 참조해서 날짜시간값을 가져온다.
+		model.addAttribute("serverTime", formattedDate );//home.jsp에서 ${serverTime} 표편언어 즉 EL에서 키이름 serverTime
+		//을 참조해서 날짜 시간값을 가져온다.
 		
 		return "home"; //뷰페이지 경로 => /WEB-INF/views/home.jsp
 	}
