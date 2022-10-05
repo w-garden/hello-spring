@@ -11,3 +11,15 @@ create table bbs(
     bbs_level number(38), --답변글 정렬순서
     bbs_date date --글 등록 날짜
 );
+
+select * from bbs order by bbs_no desc;
+
+--bbs_no_seq 시퀀스 생성
+create sequence bbs_no_seq 
+start with 1
+increment by 1
+nocache;
+-- 시퀀스 다음번호값 확인
+select bbs_no_seq.nextval from dual;
+
+
