@@ -20,4 +20,8 @@ public interface BbsDao {
 
 	void replyBbs(BbsVO rb);
 
+	void editBbs(BbsVO eb);
+
+	void delBbs(int bbs_no);
+
 }

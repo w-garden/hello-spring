@@ -50,4 +50,14 @@ public class BbsDaoImpl implements BbsDao {
 	public void replyBbs(BbsVO rb) {
 		sqlSession.insert("reply_in2", rb);
 	} //답변 저장
+
+	@Override
+	public void editBbs(BbsVO eb) {
+		sqlSession.update("bbs_edit",eb);
+	}
+
+	@Override
+	public void delBbs(int bbs_no) {
+		this.sqlSession.delete("bbs_del", bbs_no); 
+	}
 }

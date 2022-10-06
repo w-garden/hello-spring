@@ -12,5 +12,7 @@ public interface BbsService {
 	BbsVO getBbsCont(int bbs_no);
 	BbsVO getBbsCont2(int bbs_no);
 	void replyBbs(BbsVO rb);
+	void editBbs(BbsVO eb);
+	void delBbs(int bbs_no);
 
 }

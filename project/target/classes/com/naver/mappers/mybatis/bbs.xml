@@ -59,5 +59,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into bbs (bbs_no,bbs_name, bbs_title, bbs_pwd, bbs_cont, bbs_ref, bbs_step, bbs_level, bbs_date) 
 		values (bbs_no_seq.nextval, #{bbs_name}, #{bbs_title} , #{bbs_pwd}, #{bbs_cont}, #{bbs_ref}, #{bbs_step}+1, #{bbs_level}+1, sysdate)
 	</insert>
+	
+	<!-- 글 수정 --> 
+	<update id="bbs_edit">
+		update bbs set  bbs_name=#{bbs_name}, bbs_title=#{bbs_title}, bbs_cont=#{bbs_cont}, bbs_file=#{bbs_file} where bbs_no=#{bbs_no}
+	</update>
+	
+	<!-- 글삭제 -->
+	<delete id="bbs_del">
+		delete from bbs where bbs_no=#{bbs_no}
+	</delete>
 </mapper>
 		

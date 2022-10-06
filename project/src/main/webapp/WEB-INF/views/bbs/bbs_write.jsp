@@ -38,7 +38,7 @@
 				</tr>
 				<tr>
 					<th>파일첨부</th>
-					<td><input type="file" name="bbs_file" /> <br />
+					<td><input type="file" name="bbs_file" /> <br /></td>
 				</tr>
 			</table>
 			<div id="bsW_menu">

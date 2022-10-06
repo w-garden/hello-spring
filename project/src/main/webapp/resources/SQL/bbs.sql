@@ -23,3 +23,37 @@ nocache;
 select bbs_no_seq.nextval from dual;
 
 
+
+
+
+
+
+
+
+
+		SELECT user_no, user_nm, user_id FROM MEMBER_INFO;
+
+
+create table MEMBER_INFO (
+    user_no number(38),
+    user_nm varchar2(50),
+    user_id varchar2(50)
+);
+
+INSERT INTO member_info values(1,'aa','aa');
+INSERT INTO member_info values(2,'bb','bb');
+INSERT INTO member_info values(3,'cc','cc');
+commit;
+
+
+
+
+
+
+
+
+
+
+
+
+

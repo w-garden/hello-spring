@@ -48,6 +48,14 @@ public class BbsServiceImpl implements BbsService {
 		this.bbsDao.updateLevel(rb); //답변 레벨 증가
 		this.bbsDao.replyBbs(rb);
 	}//답변 레벨증가 + 답변 저장 => 트랜잭션 적용 대상
+	@Override
+	public void editBbs(BbsVO eb) {
+		this.bbsDao.editBbs(eb);
+	}
+	@Override
+	public void delBbs(int bbs_no) {
+		this.bbsDao.delBbs(bbs_no);
+	}//자료실 삭제
 
 	
 }

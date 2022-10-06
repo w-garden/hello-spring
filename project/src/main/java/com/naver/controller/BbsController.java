@@ -2,11 +2,13 @@ package com.naver.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -185,7 +187,109 @@ public class BbsController {
 		return "redirect:/bbs_list?page="+page;
 	}//bbs_reply_ok()
 	
+	//자료실 수정
+	@RequestMapping(value="/bbs_edit_ok", method=RequestMethod.POST)
+	public ModelAndView bbs_edit_ok(HttpServletRequest request, HttpServletResponse response, BbsVO eb) throws Exception{
+		response.setContentType("text/html;charset=UTF-8"); //브라우저에 출력되는 문자와 태그 언어 코딩 타입을 설정
+		PrintWriter out = response.getWriter();
+		String saveFolder = request.getRealPath("/resources/upload");//이진파일 업로드 실제 경로를 구함
+		int fileSize=5*1024*1024; //이진 파일 업로드 최대크기
+		
+		MultipartRequest multi =null; //첨부한 파일을 받을 참조변수
+		multi = new MultipartRequest(request, saveFolder, fileSize, "UTF-8");
+		
+		int bbs_no =Integer.parseInt(multi.getParameter("bbs_no"));
+		int page =1;
+		if(multi.getParameter("page")!=null) {
+			page = Integer.parseInt(multi.getParameter("page"));
+		}
+		String bbs_name = multi.getParameter("bbs_name");
+		String bbs_title = multi.getParameter("bbs_title");
+		String bbs_pwd = multi.getParameter("bbs_pwd");
+		String bbs_cont = multi.getParameter("bbs_cont");
+		
+		BbsVO db_pwd = this.bbsService.getBbsCont2(bbs_no); //DB로부터 비번을 가져옴
+		
+		if(!db_pwd.getBbs_pwd().equals(bbs_pwd)) {
+			out.println("<script>");
+			out.println("alert('비밀번호가 일치하지 않습니다.')");
+			out.println("history.back();");
+			out.println("</script>");
+		}else {
+			File upFile = multi.getFile("bbs_file");
+			if(upFile != null) {
+				String fileName=upFile.getName();
+				File deFile = new File(saveFolder + db_pwd.getBbs_file());//삭제할 파일 객체 생성
+				if(deFile.exists()) {
+					deFile.delete();
+				}
+				Calendar cal = Calendar.getInstance();
+				int year =cal.get(Calendar.YEAR);
+				int month = cal.get(Calendar.MONTH)+1;
+				int date = cal.get(Calendar.DATE);
+				
+				String homedir = saveFolder+"/"+year+"-"+month+"-"+date;//오늘 날짜 폴더 경로 저장
+				File path01 = new File(homedir);
+				if(!(path01.exists())) {path01.mkdir(); }//오늘날짜 폴더 생성
+				Random r = new Random(); //난수를 발생시키는 클래스
+				int random = r.nextInt(1000000000);
+				
+				/*첨부 파일 확장자를 구함 */
+				int index=fileName.lastIndexOf(".");
+				String fileExtendsion = fileName.substring(index+1); //마침표 이후부터 마지막 문자까지 구함
+				String refileName ="bbs"+year+month+date+random+"."+fileExtendsion;//새로운 파일명 문자열
+				String fileDBName ="/"+year+"-"+month+"-"+date+"/"+refileName; //db에 저장될 파일명
+				upFile.renameTo(new File(homedir+"/"+refileName)); //생성된 폴더에 변경된 파일명으로 실제 업로드
+				eb.setBbs_file(fileDBName);
+
+			}else { //첨부파일이 없는 경우
+				String fileDBName ="";
+				eb.setBbs_file(fileDBName);
+				if(db_pwd.getBbs_file() != null) {
+					eb.setBbs_file(db_pwd.getBbs_file());
+				}else {
+					eb.setBbs_file(fileDBName);
+				}
+
+			}//수정 첨부파일을 첨부한 경우와 안한 경우 분기문(조건문)
+			eb.setBbs_no(bbs_no);
+			eb.setBbs_name(bbs_name); eb.setBbs_title(bbs_title); 	eb.setBbs_cont(bbs_cont);
+			this.bbsService.editBbs(eb); //번호를 기준으로 글쓴이, 글제목, 글내용, 첨부파일 수정
+			
+			ModelAndView em = new ModelAndView("redirect:/bbs_cont");
+			em.addObject("bbs_no", bbs_no);
+			em.addObject("page", page);
+			em.addObject("state","cont");
+			return em; //주소창에 다음과 같이 실행된다. bbs_cont?bbs_no=번호&page=쪽번호&state=cont 즉 주소창에 노출되는 get방식으로 3개의 인자값이 전달
+		}
+		return null;
+	} //bbs_edit_ok()
+
 	
+	//자료실 삭제
+	@RequestMapping("/bbs_del_ok")
+	public String bbs_del_ok(int bbs_no, int page, String del_pwd, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		String up =request.getRealPath("/resources/upload");
+		
+		BbsVO db_pwd =this.bbsService.getBbsCont2(bbs_no);
+		if(!db_pwd.getBbs_pwd().equals(del_pwd)) {
+			out.println("<script>");
+			out.println("alert('비번이 다릅니다.')");
+			out.println("history.back();");
+			out.println("</script>");
+		}else {
+			this.bbsService.delBbs(bbs_no); //번호를 기준으로 자료실 삭제
+			
+			if(db_pwd.getBbs_file()!= null) { //첨부한 파일이 있는 경우
+				File delFile = new File(up+db_pwd.getBbs_file()); //삭제할 파일 객체 생성
+				delFile.delete(); //폴더는 삭제 안되고, 폴더 안의 파일만 삭제
+			}
+			return "redirect:/bbs_list?page="+page;
+		}
+		return null;
+	}
 	
 	
 	

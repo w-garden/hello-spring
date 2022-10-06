@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c"
-           uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +45,8 @@ href="/resources/css/board.css" />
 "bbs_cont?bbs_no=${b.bbs_no}&state=cont&page=${page}">${b.bbs_title}</a>     
      </td>
      <td align="center">${b.bbs_name}</td>
-     <td align="center">${b.bbs_date}</td>
+     <td align="center">${fn:substring(b.bbs_date,0,10)}</td>
+     					<%--0이상 10미만 사이의 년월일만 반환 --%>
      <td align="center">${b.bbs_hit}</td>
     </tr>
     </c:forEach>
