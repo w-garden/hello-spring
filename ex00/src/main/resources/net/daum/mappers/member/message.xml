@@ -9,5 +9,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<insert id="m_in2" parameterType="message">
 		insert into tbl_message (mid, targetid, sender, message, senddate) values (mid_no_seq.nextval, #{targetid},#{sender},#{message},sysdate)
 		</insert>
- 
 </mapper>

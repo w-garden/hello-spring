@@ -10,16 +10,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	update tbl_user set upoint=upoint+#{point} where uid2=#{sender}
 </update>
 
-
-
-
-
-
-
-
-
-
-
-
-
 </mapper>

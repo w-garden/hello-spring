@@ -16,8 +16,6 @@ select * from tbl_reply where bno=#{no} order by rno desc
 </select>
 
 
-
-
 <!-- 댓글 수정 -->
 <select id="reply_edit" parameterType="r">
 	update tbl_reply set replytext=#{replytext}, updatedate=sysdate where rno=#{rno}

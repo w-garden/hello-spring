@@ -7,11 +7,12 @@ create table admin(
 );
 
 commit;
-
-
+delete from admin;
 select * from admin;
 
 select * from bbs;
+
+
 
 
 create table test (

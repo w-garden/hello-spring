@@ -6,13 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>자료실 목록</title>
-<link rel="stylesheet" type="text/css"
-href="/resources/css/board.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/board.css" />
 
 </head>
 <body>
-<form method="get" action="bbs_list" 
->
+<form method="get" action="bbs_list">
  <div id="bList_wrap">
   <h2 class="bList_title">자료실 목록</h2>
   <div class="bList_count">글개수: ${listcount} </div>
