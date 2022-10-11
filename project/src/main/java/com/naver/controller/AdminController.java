@@ -21,83 +21,107 @@ import pwdconv.PwdChange;
 
 @Controller
 public class AdminController {
-	
+
 	@Autowired
 	private AdminService adminService;
 	
-	//관리자 로그인폼
+	
+	//관리자 로그인 폼
 	@GetMapping("admin_index")
 	public String admin_index() {
-		return "admin/admin_login"; 
-	}
+		return "admin/admin_login";//WEB-INF/views/admin/admin_login.jsp
+	}//admin_index()
 	
-	//관리자 로그인 인증과 관리자 비번 암호화
+    //관리자 로그인 인증과 관리자 비번 암호화
 	@PostMapping("admin_login_ok")
-	public ModelAndView admin_login_ok(AdminVO ab, HttpServletResponse response, HttpServletRequest request, HttpSession session) throws Exception {
+	public ModelAndView admin_login_ok(AdminVO ab,HttpServletResponse response,HttpServletRequest request,
+			HttpSession session) throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
+		PrintWriter out=response.getWriter();
 		
-		ab.setAdmin_pwd(PwdChange.getPassWordToXEMD5String(ab.getAdmin_pwd())); //비번 암호화 : 과거 네이트온에서 사용한 MD5 암호화 인코딩 스킬
+		ab.setAdmin_pwd(PwdChange.getPassWordToXEMD5String(ab.getAdmin_pwd()));//비번 암호화:과거 네이트온에 사용한 MD5 암호화 즉
+		//인코딩 스킬
 		//ab.setAdmin_name("관리자");
-		//this.adminService.insertAdmin(ab); //관리자 정보 저장(관리자 아이디, 암호화 된 관리자 비번, 관리자 이름등 )
+		//this.adminService.insertAdmin(ab);//관리자 정보 저장(관리자 아이디,암호화 된 관리자 비번,관리자이름등)
 		
-		AdminVO admin_pwd=this.adminService.adminLogin(ab.getAdmin_id()); //관리자 아이디를 기준으로 관리자 정보를 DB로부터 가져옴
-		
+		AdminVO admin_pwd=this.adminService.adminLogin(ab.getAdmin_id());//관리자 아이디를 기준으로 관리자 정보를 DB로 부터 가져옴
 		
 		if(admin_pwd == null) {
 			out.println("<script>");
-			out.println("alert('관리자 정보가 없습니다')");
-			out.println("history.back();");
+			out.println("alert('관리자 정보가 없습니다!');");
+			out.println("history.go(-1);");
 			out.println("</script>");
 		}else {
 			if(!admin_pwd.getAdmin_pwd().equals(ab.getAdmin_pwd())) {
 				out.println("<script>");
-				out.println("alert('관리자 비번이 다릅니다')");
+				out.println("alert('관리자 비번이 다릅니다!');");
 				out.println("history.back();");
 				out.println("</script>");
 			}else {
-				session.setAttribute("admin_id", ab.getAdmin_id());
-				session.setAttribute("admin_name", admin_pwd.getAdmin_name());
-				return new ModelAndView("redirect:/admin_main"); //redirect 는 get 방식이다. admin_main 은 매핑주소
+				session.setAttribute("admin_id",ab.getAdmin_id());//세션 admin_id에 관리자 아이디를 저장
+				session.setAttribute("admin_name",admin_pwd.getAdmin_name());
+				
+				return new ModelAndView("redirect:/admin_main");
 			}
 		}
 		return null;
-	}//admin_login_ok
+	}//admin_login_ok()
 	
 	//관리자 메인
 	@RequestMapping("/admin_main")
-	public String admin_main(HttpServletResponse response, HttpSession session) throws Exception {
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
+	public String admin_main(HttpServletResponse response,HttpSession session) throws Exception{
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
 		
-		String admin_id = (String) session.getAttribute("admin_id");//관리자 세션 아이디값을 구함
+		String admin_id = (String)session.getAttribute("admin_id");//관리자 세션 아이디값을 구함
 		
 		if(admin_id == null) {
 			out.println("<script>");
-			out.println("alert('관리자로 다시 로그인 하세요')");
+			out.println("alert('관리자로 다시 로그인 하세요!');");
 			out.println("location='admin_index';");
 			out.println("</script>");
-		}
-		else {
-			return "admin/admin_main"; //뷰페이지 경로는 /WEB-INF/view/admin/admin_main.jsp
+		}else {
+			return "admin/admin_main"; //뷰페이지 경로:/WEB-INF/views/admin/admin_main.jsp
 		}
 		return null;
-	}//admin_main
+	}//admin_main()
 	
 	//관리자 로그아웃
-	@RequestMapping(value="/admin_logout", method=RequestMethod.POST)
-	public String admin_logout(HttpServletResponse response, HttpSession session) throws Exception {
+	@RequestMapping(value="/admin_logout",method=RequestMethod.POST)
+	public String admin_logout(HttpServletResponse response,HttpSession session) throws Exception{
 		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
+		PrintWriter out=response.getWriter();
 		
-		session.invalidate();
+		session.invalidate();//세션 만료 => 로그아웃
 		
 		out.println("<script>");
-		out.println("alert('관리자 로그아웃 되었습니다!')");
+		out.println("alert('관리자 로그아웃 되었습니다!');");
 		out.println("location='admin_index';");
 		out.println("</script>");
 		
 		return null;
-	}//admin_logout
-	
+	}//admin_logout()
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -9,23 +9,31 @@ import com.naver.dao.AdminBbsDAO;
 import com.naver.vo.BbsVO;
 
 @Service
-public class AdminBbsServiceImpl implements AdminBbsService{
-	
+public class AdminBbsServiceImpl implements AdminBbsService {
+
 	@Autowired
-	private AdminBbsDAO adminBbdDao;
+	private AdminBbsDAO adminBbsDao;
 
 	@Override
 	public int getListCount(BbsVO b) {
-		return adminBbdDao.getListCount(b);
+		return this.adminBbsDao.getListCount(b);
 	}
 
 	@Override
 	public List<BbsVO> getBbsList(BbsVO b) {
-		return adminBbdDao.getBbsList(b);
+		return this.adminBbsDao.getBbsList(b);
 	}
 
 	@Override
 	public void insertBbs(BbsVO b) {
-		adminBbdDao.insertBbs(b);
+		this.adminBbsDao.insertBbs(b);		
 	}
 }
+
+
+
+
+
+
+
+

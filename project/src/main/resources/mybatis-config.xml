@@ -6,10 +6,9 @@
   
   <configuration>
      <typeAliases>
-      
-       <typeAlias type="com.naver.vo.BbsVO" alias="bbs"/>
-       <typeAlias type="com.naver.vo.AdminVO" alias="admin"/>
-       
+      <typeAlias type="com.naver.vo.BbsVO" alias="bbs" /> <!-- BbsVO 빈클래스 객체명 별칭이름 bbs를 지정.이 bbs를 mybatis
+      매퍼태그에서 참조한다. -->
+      <typeAlias type="com.naver.vo.AdminVO" alias="admin" />         
      </typeAliases>
   </configuration>
   
