@@ -44,6 +44,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      values(bbs_no_seq.nextval, #{bbs_name}, #{bbs_title}, #{bbs_pwd}, #{bbs_cont}, #{bbs_file},bbs_no_seq.nextval,
      0,0,sysdate)
    </insert>
+   
+   
+   <!-- 관리자 자료실 글 보기 -->
+   <select id="abbs_cont" resultType="bbs">
+   	select * from bbs where bbs_no=#{bbs_no}
+   </select>
+   
+   <!-- 관리자 자료실 수정 -->
+   <update id="abbs_update">
+   		 update bbs set bbs_name=#{bbs_name}, bbs_title=#{bbs_title}, bbs_cont=#{bbs_cont}, bbs_file=#{bbs_file}
+   		 where bbs_no=#{bbs_no}    
+   </update>
+   
+   <!-- 관리자 자료실 삭제 -->
+   <delete id="abbs_delete">
+   		delete from bbs where bbs_no=#{bbs_no}
+   </delete>
 </mapper> 
 
 

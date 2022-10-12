@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/admin.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/board.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/admin_board.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/admin_bbs.css" />
 
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/bbs.js"></script>

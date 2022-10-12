@@ -200,13 +200,113 @@ public class AdminBbsController {
 			if(state.equals("cont")) { //관리자 자료실 상세정보 보기
 				m.setViewName("admin/admin_bbs_cont"); //뷰페이지 경로
 			}else if(state.equals("edit")) { 				//관리자 자료실 수정폼일때
-				m.setViewName("admin/admin_bbs_esit");
+				m.setViewName("admin/admin_bbs_edit");
 			}
 			return m;
 		}
 		return null;
 	}// admin_bbs_cont
 
+	//관리자 자료실 수정
+	@RequestMapping(value="/admin_bbs_edit_ok", method = RequestMethod.POST)
+	public ModelAndView admin_bbs_edit_ok(HttpServletRequest request, HttpServletResponse response, BbsVO b, HttpSession session) throws Exception {
+		response.setContentType("text/html;charset=UTF-8");
+		
+		if(isAdminLogin(response, session)) {
+			String saveFolder=request.getRealPath("/resources/upload");
+			
+			
+			int fileSize = 5 * 1024 * 1024;// 이진파일 업로드 최대크기
+			MultipartRequest multi = null;// 이진파일을 받을 참조변수
+
+			multi = new MultipartRequest(request, saveFolder, fileSize, "UTF-8");
+			
+			int bbs_no =Integer.parseInt(multi.getParameter("bbs_no"));
+			int page =1;
+			if(multi.getParameter("page") != null) {
+				page=Integer.parseInt(multi.getParameter("page"));
+			}
+			
+			String bbs_name = multi.getParameter("bbs_name");
+			String bbs_title = multi.getParameter("bbs_title");
+			String bbs_pwd = multi.getParameter("bbs_pwd");
+			String bbs_cont = multi.getParameter("bbs_cont");
+			
+			BbsVO db_File=this.adminBbsService.getBbsCont(bbs_no); //DB로부터 기존 첨부파일명을 구함
+			File upFile = multi.getFile("bbs_file"); 
+			
+			if(upFile != null) {
+				String fileName=upFile.getName();
+				File delFile = new File(saveFolder+db_File.getBbs_file()); //삭제할 파일 객체 생성
+				if(delFile.exists()) {
+					delFile.delete(); //기존 첨부파일을 삭제
+				}
+				Calendar cal = Calendar.getInstance();
+				int year=cal.get(Calendar.YEAR);
+        		int month=cal.get(Calendar.MONTH)+1;
+        		int date=cal.get(Calendar.DATE);
+        		
+        		String homedir=saveFolder+"/"+year+"-"+month+"-"+date;
+        		File path01=new File(homedir);
+        		
+        		if(!(path01.exists())) { path01.mkdir();}
+        		Random r=new Random();
+        		int random=r.nextInt(100000000);
+        		
+        		/*첨부파일 확장자 구함*/
+        		int index=fileName.lastIndexOf(".");
+        		String fileExtendsion=fileName.substring(index+1);//.이후부터 마지막 문자 즉 첨부파일 확장자를 구함.
+        		String refileName="bbs"+year+month+date+random+"."+fileExtendsion;
+        		String fileDBName="/"+year+"-"+month+"-"+date+"/"+refileName;
+        		upFile.renameTo(new File(homedir+"/"+refileName));
+        		b.setBbs_file(fileDBName);
+        	}else {//수정 첨부 파일을 하지 않았을 때
+        		String fileDBName="";
+        		
+        		
+        		if(db_File.getBbs_file() != null) {
+        			b.setBbs_file(db_File.getBbs_file());
+        		}else {
+        		    b.setBbs_file(fileDBName);	
+        		}
+        	}
+        	b.setBbs_no(bbs_no); b.setBbs_name(bbs_name); b.setBbs_title(bbs_title); b.setBbs_cont(bbs_cont);
+        	
+        	this.adminBbsService.updateBbs(b);//번호를 기준으로 글쓴이, 글제목, 글내용,첨부파일 수정
+        	
+        	ModelAndView em=new ModelAndView("redirect:/admin_bbs_list?page="+page);
+        	return em; //admin_bbs_list?page=쪽번호가 get으로 전달된다.
+        }
+		return null;
+	}//admin_bbs_edit_ok()
+
+	
+	//관리자 자료실 삭제
+	@GetMapping("admin_bbs_del")
+	public String admin_bbs_del(HttpServletResponse response, HttpServletRequest request, HttpSession sesison, int no) throws Exception{
+		response.setContentType("text/html; charset=UTF-8");
+		
+		if(isAdminLogin(response, sesison)) { //==true가 생략됨.
+			int page=1;
+			if(request.getParameter("page") != null) {
+				page=Integer.parseInt(request.getParameter("page"));
+			}
+			String up = request.getRealPath("/resources/upload");
+			BbsVO db_File=this.adminBbsService.getBbsCont(no);// DB로부터 기본 첨부파일 정보를 가져옴
+			this.adminBbsService.delBbs(no); //번호를 기준으로 DB로부터 레코드 삭제
+			
+			if(db_File.getBbs_file() != null) { //기존 첨부파일이 있는 경우
+				File delFile=new File(up+db_File.getBbs_file()); //삭제할 파일 객체 생성
+				delFile.delete();
+			}
+			return "redirect:/admin_bbs_list?page="+page;
+		}
+		return null;
+	}//admin_bbs_del()
+	
+	
+	
+	
 	// 반복적인 관리자 로그인을 하나로 줄이기
 	public static Boolean isAdminLogin(HttpServletResponse response, HttpSession session) throws Exception {
 		PrintWriter out = response.getWriter();

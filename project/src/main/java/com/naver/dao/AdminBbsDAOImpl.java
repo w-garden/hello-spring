@@ -28,6 +28,22 @@ public class AdminBbsDAOImpl implements AdminBbsDAO {//관리자 자료실 모�
 	public void insertBbs(BbsVO b) {
 		this.sqlSession.insert("abbs_in", b);
 	}//관리자 자료실 저장
+
+	@Override
+	public BbsVO getBbsCont(int no) {
+		return sqlSession.selectOne("abbs_cont",no);
+	}//관리자 자료실 상세정보 보기와 수정폼
+
+	@Override
+	public void updateBbs(BbsVO b) {
+		sqlSession.update("abbs_update", b);
+	}//관리자 자료실 수정
+
+	@Override
+	public void deleteBbs(int no) {
+		sqlSession.delete("abbs_delete",no);
+		
+	}
 }
 
 
