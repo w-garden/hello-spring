@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Member">
+	<!-- 아이디 중복 검색 -->
+	<select id="m_idcheck" parameterType="String" resultType="member">
+		select * from member where mem_id=#{mem_id}
+	</select> 
+	<!-- 우편 주소 검색 -->
+	<select id="m_zip" resultType="zipcode">
+		select * from zipcode where dong like #{dong}	
+	</select>
+	
+	<!-- 회원가입 -->
+	<select id="m_join">
+		insert into member(mem_id, mem_pwd, mem_name, mem_zip, mem_zip2, mem_addr,mem_addr2,mem_phone01,mem_phone02,mem_phone03, mail_id, mail_domain, mem_state, mem_date)
+		values(#{mem_id}, #{mem_pwd}, #{mem_name}, #{mem_zip}, #{mem_zip2}, #{mem_addr}, #{mem_addr2}, #{mem_phone01}, #{mem_phone02}, #{mem_phone03}, #{mail_id}, #{mail_domain}, 1, sysdate)
+	</select>
+	
+	<!-- 비번찾기 회원정보검색-->
+	<select id="p_find" resultType="member">
+		select * from member where mem_id=#{mem_id} and mem_name=#{mem_name}
+	</select>
+  	<!-- 비번 수정 -->
+  	<update id="pwd_edit">
+  		update member set mem_pwd=#{mem_pwd} where mem_id=#{mem_id} 
+  	</update>
+  	
+  	<!-- 로그인 체크 -->
+  	<select id="m_loginCK" resultType="member">
+  		select * from member where mem_id=#{id} and mem_state=1
+  	</select>
+  	
+  	<!-- 회원정보 보기-->
+  	<select id="m_edit" parameterType="String" resultType="member">
+  		select * from member where mem_id=#{mem_id}
+  	</select>
+</mapper> 
+
+
+
+
+
+
+
+

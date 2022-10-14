@@ -111,9 +111,9 @@ function id_check(){
     $.ajax({//$는 jQuery란 뜻. $.ajax 뜻은 jQuery 내의 아작스 실행
         type:"POST",//데이터를 서버로 보내는 방법
        //url:"./member/member_idcheck.jsp",    
-        url:"member_idcheck", //아작스 서버 주소 파일명
+        url:"member_idcheck", //url 패턴 매핑주소 경로
         data: {"id":$mem_id},  //좌측 id 피라미터 이름에 우측 $mem_id변수값을 저장
-        datatype:"int",//서버의 실행된 결과값을 사용자로 받아오는 방법
+        datatype:"int",//서버의 실행된 결과값을 사용자로 받아오는 자료형
         success: function (data) {//success는 아작스로 받아오는것이 성공했을경우
         	//서버 데이터를 data변수에 저장
       	  if(data==1){//중복 아이디가 있다면

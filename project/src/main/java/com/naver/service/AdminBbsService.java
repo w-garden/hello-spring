@@ -10,7 +10,7 @@ public interface AdminBbsService {
 	List<BbsVO> getBbsList(BbsVO b);
 	void insertBbs(BbsVO b);
 	BbsVO getBbsCont(int no);
-	void updateBbs(BbsVO b);
+	void udpateBbs(BbsVO b);
 	void delBbs(int no);
 
 }

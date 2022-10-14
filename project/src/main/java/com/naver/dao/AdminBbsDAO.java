@@ -11,5 +11,5 @@ public interface AdminBbsDAO {
 	void insertBbs(BbsVO b);
 	BbsVO getBbsCont(int no);
 	void updateBbs(BbsVO b);
-	void deleteBbs(int no);
+	void delBbs(int no);
 }

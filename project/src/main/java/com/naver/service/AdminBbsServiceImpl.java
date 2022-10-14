@@ -31,17 +31,17 @@ public class AdminBbsServiceImpl implements AdminBbsService {
 
 	@Override
 	public BbsVO getBbsCont(int no) {
-		return adminBbsDao.getBbsCont(no);
+		return this.adminBbsDao.getBbsCont(no);
 	}
 
 	@Override
-	public void updateBbs(BbsVO b) {
-		adminBbsDao.updateBbs(b);
+	public void udpateBbs(BbsVO b) {
+		this.adminBbsDao.updateBbs(b);		
 	}
 
 	@Override
 	public void delBbs(int no) {
-		adminBbsDao.deleteBbs(no);
+		this.adminBbsDao.delBbs(no);		
 	}
 }
 

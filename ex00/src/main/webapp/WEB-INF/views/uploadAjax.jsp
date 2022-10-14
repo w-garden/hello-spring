@@ -26,6 +26,7 @@
 				data:formData, //아작스를 통해서 formData자체를 전송
 				type:'POST',
    				success:function(data){
+   						alert('성공');
 			            //받아오는 것이 성공시 호출되는 콜백함
 			         }
 

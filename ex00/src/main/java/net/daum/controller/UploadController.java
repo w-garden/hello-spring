@@ -15,9 +15,6 @@ public class UploadController {
 		//리턴타입이 없는 void형이면 URL매핑주소인 uploadForm 뷰페이지 파일명이 된다. 뷰페이지 경로는 (뷰리졸브 경로)는 /WEB-INF/views/uploadForm.jsp가 된다.
 	}//uploadForm.jsp
 	
-	
-	
-	
 	@PostMapping("uploadFormAction") //post방식으로 접근하는 매핑주소 처리. uploadFormAction 매핑주소 등록
 	public void uploadFormAction(MultipartFile[] uploadFile) {
 		/* 스프링 api의 MultipartFile 타입을 사용해서 업로드 되는 파일을 쉽게 처리한다.

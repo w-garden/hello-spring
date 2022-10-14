@@ -9,9 +9,12 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/board.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/admin_board.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/admin_bbs.css" />
-
+<link rel="stylesheet" type="text/css" href="/resources/css/admin_member.css" />
 <script src="/resources/js/jquery.js"></script>
 <script src="/resources/js/bbs.js"></script>
+<script src="/resources/js/member.js"></script>
+<script src="/resources/js/bbs.js"></script>
+<script src="/resources/js/gongji.js"></script>
 </head>
 <body>
 	<div id="aMain_wrap">
