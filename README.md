@@ -4,4 +4,4 @@
 인프런 **"스프링MVC2편-백엔드 웹개발 활용기술"** 을 토대로 타임리프 기본 문법 정리
 
 
-<a href="https://mangrove-motion-102.notion.site/0b20594d07b34ee3886e5306f713ac0d?v=53d09713df3b4891808b9af5f183f187"> 노션정리</a>
+<a href="https://www.notion.so/01-Thymeleaf-e7f9f1eafd684fff94b6da9b8f3a6c49"> 노션정리</a>
