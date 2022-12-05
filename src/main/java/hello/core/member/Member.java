@@ -1,5 +1,7 @@
 package hello.core.member;
 
+import lombok.Getter;
+
 public class Member {
     private Long id;
     private String name;
