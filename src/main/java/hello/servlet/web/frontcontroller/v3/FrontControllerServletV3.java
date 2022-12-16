@@ -19,15 +19,15 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name="frontControllerServletV3", urlPatterns = "/front-controller/v3/*")
+@WebServlet(name = "frontControllerServletV3", urlPatterns = "/front-controller/v3/*")
 public class FrontControllerServletV3 extends HttpServlet {
 
     private Map<String, ControllerV3> controllerMap = new HashMap<>();
 
     public FrontControllerServletV3() {
-        controllerMap.put("/font-controller/v3/members/new-form", new MemberFormControllerV3());
-        controllerMap.put("/font-controller/v3/members/save", new MemberSaveControllerV3());
-        controllerMap.put("/font-controller/v3/members", new MemberListControllerV3());
+        controllerMap.put("/front-controller/v3/members/new-form", new MemberFormControllerV3());
+        controllerMap.put("/front-controller/v3/members/save", new MemberSaveControllerV3());
+        controllerMap.put("/front-controller/v3/members", new MemberListControllerV3());
     }
 
     @Override
@@ -39,25 +39,25 @@ public class FrontControllerServletV3 extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
-        
+
         Map<String, String> paramMap = createParamMap(request);
         ModelView mv = controller.process(paramMap);
 
-        String viewName=mv.getViewName();
-        MyView view = viewResolver(viewName);
-        view.render(mv.getModel(), request, response);
-        
-        
+        String viewName = mv.getViewName(); //view의 논리 이름 mv.getViewName()
+        MyView view = viewResolver(viewName); //view를 실제 물리적 이름으로 변환해줌
+        view.render(mv.getModel(), request, response); //rendering 함
+
+
     }
 
     private MyView viewResolver(String viewName) {
-        return new MyView("/WEB-INF/views" + viewName + ".jsp");
+        return new MyView("/WEB-INF/views/" + viewName + ".jsp");
     }
 
     private Map<String, String> createParamMap(HttpServletRequest request) {
-        Map<String,String> paramMap = new HashMap<>();
+        Map<String, String> paramMap = new HashMap<>();
         request.getParameterNames().asIterator()
-                .forEachRemaining(paramName->paramMap.put(paramName,request.getParameter(paramName)));
+                .forEachRemaining(paramName -> paramMap.put(paramName, request.getParameter(paramName)));
         return paramMap;
 
     }

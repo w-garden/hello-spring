@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+//컨트롤러가 뷰(MyView)를 반환하는 특징이 있다
 public interface ControllerV2 {
     MyView process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 }

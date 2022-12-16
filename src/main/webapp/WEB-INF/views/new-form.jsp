@@ -7,9 +7,24 @@
 <body>
 <!-- 상대경로 사용, [현재 URL이 속한 계층 경로 + /save] -->
 <form action="save" method="post">
-    username: <input type="text" name="username"/>
-    age: <input type="text" name="age"/>
-    <button type="submit">전송</button>
+
+    <table border="1">
+        <caption>회원가입  폼</caption>
+        <tr>
+            <td> username</td>
+            <td><input type="text" name="username"/></td>
+        </tr>
+        <tr>
+            <td> age</td>
+            <td><input type="text" name="age"/></td>
+        </tr>
+        <tr>
+        <th colspan="2">
+            <button type="submit">회원가입</button>
+        </th>
+        </tr>
+    </table>
+
 </form>
 </body>
 </html>
