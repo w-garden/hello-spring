@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/mapping/users")
 public class MappingClassController {
+
     /**
      * GET /mapping/users
      */
@@ -22,6 +23,7 @@ public class MappingClassController {
     public String users(){
         return "get users";
     }
+
     /**
      * POST /mapping/users
      */
@@ -45,6 +47,7 @@ public class MappingClassController {
     public String updateUser(@PathVariable String userId){
         return "update userId = " + userId;
     }
+
     /**
      * DELETE /mapping/users/{userId}
      */
