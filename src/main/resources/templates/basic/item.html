@@ -11,10 +11,13 @@
     </style>
 </head>
 <body>
-<div class="container">
+<div class="container" th:object="${item}">
     <div class="py-5 text-center">
         <h2>상품 상세</h2></div>
     <div>
+
+        <h2 th:if="${param.status}" th:text="'저장완료'"></h2><br>
+
         <label for="itemId">상품 ID</label>
         <input type="text" id="itemId" name="itemId" class="form-control" value="1" th:value="${item.id}" readonly>
     </div>
