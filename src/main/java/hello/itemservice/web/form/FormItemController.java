@@ -1,4 +1,4 @@
-package hello.itemservice.web.basic;
+package hello.itemservice.web.form;
 
 import hello.itemservice.domain.item.DeliveryCode;
 import hello.itemservice.domain.item.Item;
