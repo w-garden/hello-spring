@@ -43,14 +43,14 @@ public class ValidationItemControllerV1 {
     @PostMapping("/add")
     public String addItem(@ModelAttribute Item item, RedirectAttributes redirectAttributes, Model model) {
 
-       //검증 오류 결과를 보관
+        //검증 오류 결과를 보관
         Map<String, String> errors = new HashMap<>();
 
         //검증 로직
-        if(!StringUtils.hasText(item.getItemName())) {
+        if(!StringUtils.hasText(item.getItemName())) { //StringUtils.hasText() -> 문자열 포함여부 체크
             errors.put("itemName", "상품 이름은 필수입니다.");
         }
-        if(item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 10000000){
+        if(item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000){
             errors.put("price", "가격은 1,000 ~ 1,000,000 까지 허용합니다.");
         }
         if(item.getQuantity() == null || item.getQuantity() >= 9999){
