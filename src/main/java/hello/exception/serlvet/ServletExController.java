@@ -12,14 +12,21 @@ import java.io.IOException;
 @Controller
 public class ServletExController {
 
+    /**
+     * Exception
+     */
     @GetMapping("/error-ex")
     public void errorEx(){
         throw new RuntimeException("예외 발생!");
     }
 
+    /**
+     * sendError
+     */
     @GetMapping("/error-404")
     public void error404(HttpServletResponse response) throws IOException {
         response.sendError(404,"404 오류!");
+        // response.sendError : HTTP 상태코드와 에러메세지를 확인할 수 있음(예외를 던지지는 않는다.)
     }
 
     @GetMapping("/error-500")

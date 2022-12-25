@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 오류 화면을 보여주기 위한 컨트롤러
+ */
 @Slf4j
 @Controller
 public class ErrorPageController {
@@ -23,6 +26,7 @@ public class ErrorPageController {
     @RequestMapping("/error-page/404")
     public String errorPage404(HttpServletRequest request, HttpServletResponse response) {
         log.info("errorPage 404");
+        printErrorInfo(request);
         return "error-page/404";
     }
 
