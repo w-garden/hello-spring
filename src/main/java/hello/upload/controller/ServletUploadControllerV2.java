@@ -1,7 +1,7 @@
 package hello.upload.controller;
 
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
@@ -32,39 +32,44 @@ public class ServletUploadControllerV2 {
 
     @PostMapping("/upload")
     public String saveFileV1(HttpServletRequest request) throws ServletException, IOException {
-        log.info("request = {}", request);
 
+        log.info("request = {}", request);
 
         String itemName = request.getParameter("itemName");
         log.info("itemName={}", itemName);
 
         Collection<Part> parts = request.getParts();
         log.info("parts={}", parts);
-        for(Part part : parts){
+
+
+        for (Part part : parts) {
             log.info("===== PART =====");
             log.info("name={}", part.getName());
             Collection<String> headersNames = part.getHeaderNames();
+
             for (String headerName : headersNames) {
                 log.info("header {} : {}", headerName, part.getHeader(headerName));
 
                 //편의 메서드
                 //content-disposition; filename
                 log.info("submittedFileName={}", part.getSubmittedFileName());
-                log.info("size={}", part.getSize());
+                log.info("size={}", part.getSize()); //part body size
 
                 //데이터 읽기
                 InputStream inputStream = part.getInputStream();
                 String body = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
                 log.info("body={}", body);
 
+
                 //파일에 저장하기
                 if (StringUtils.hasText(part.getSubmittedFileName())) {
                     String fullPath = fileDir + part.getSubmittedFileName();
                     log.info("파일 저장 fullPath={}", fullPath);
-                    part.write(fullPath);
+                    part.write(fullPath); //파일 저장하는 메서드
                 }
             }
-            return "upload-form";
         }
+        return "upload-form";
+
     }
 }
