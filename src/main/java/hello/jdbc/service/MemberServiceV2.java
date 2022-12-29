@@ -23,11 +23,16 @@ public class MemberServiceV2 {
         Connection conn = dataSource.getConnection();
         try{
             conn.setAutoCommit(false); //트랜잭션 시작
+
             bizLogic(conn, fromId, toId, money);  //비즈니스 로직
+
             conn.commit(); //성공시 커밋
+
         }catch (Exception e){
+
             conn.rollback(); //실패시 롤백
             throw new IllegalStateException(e);
+
         }finally {
             release(conn);
         }
