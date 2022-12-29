@@ -5,5 +5,7 @@ create table member (
     primary key (member_id)
 );
 
+/*자동 커밋 모드 설정*/
+set autocommit true;
 insert into member(member_id, money) values ('hi1', 10000);
 insert into member(member_id, money) values ('hi2', 20000);
