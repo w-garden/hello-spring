@@ -7,3 +7,4 @@
 2. Connection Pool
 3. Transaction
 4. Proxy AOP
+5. Exception(checked exception, unchecked exception)
