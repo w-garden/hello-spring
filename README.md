@@ -8,4 +8,4 @@
 3. Transaction
 4. Proxy AOP
 5. Exception(checked exception, unchecked exception)
-6. JdbcTemplate
+6. 반복코드제거(JdbcTemplate)
