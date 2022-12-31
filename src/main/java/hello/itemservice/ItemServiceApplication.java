@@ -9,7 +9,11 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 
 
-@Import(MemoryConfig.class)
+//@Import(MemoryConfig.class)
+
+@Import(JdbcTemplateV1Config.class)
+//@Import(JdbcTemplateV2Config.class)
+
 @SpringBootApplication(scanBasePackages = "hello.itemservice.web")
 public class ItemServiceApplication {
 
@@ -18,7 +22,7 @@ public class ItemServiceApplication {
 	}
 
 	@Bean
-	@Profile("local")
+	@Profile("local") //설정이 local로 설정되어있을때만 실행
 	public TestDataInit testDataInit(ItemRepository itemRepository) {
 		return new TestDataInit(itemRepository);
 	}
