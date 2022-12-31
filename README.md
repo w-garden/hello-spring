@@ -8,3 +8,4 @@
 3. Transaction
 4. Proxy AOP
 5. Exception(checked exception, unchecked exception)
+6. JdbcTemplate
