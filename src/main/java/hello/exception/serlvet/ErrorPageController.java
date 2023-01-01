@@ -39,13 +39,13 @@ public class ErrorPageController {
 
 
     private void printErrorInfo(HttpServletRequest request) {
-        log.info("ERROR_EXCEPTION: ex=", request.getAttribute(ERROR_EXCEPTION));
+        log.info("ERROR_EXCEPTION: {}", request.getAttribute(ERROR_EXCEPTION));
         //ex의 경우 NestedServletException 스프링이 한번 감싸서 변환
-        log.info("ERROR_EXCEPTION_TYPE: {}", request.getAttribute(ERROR_EXCEPTION_TYPE));
-        log.info("ERROR_MESSAGE: {}", request.getAttribute(ERROR_MESSAGE));
-        log.info("ERROR_REQUEST_URI: {}", request.getAttribute(ERROR_REQUEST_URI));
-        log.info("ERROR_SERVLET_NAME: {}", request.getAttribute(ERROR_SERVLET_NAME));
-        log.info("ERROR_STATUS_CODE: {}", request.getAttribute(ERROR_STATUS_CODE));
-        log.info("getDispatcherType= {}", request.getDispatcherType());
+        log.info("ERROR_EXCEPTION_TYPE : {}", request.getAttribute(ERROR_EXCEPTION_TYPE));
+        log.info("ERROR_MESSAGE : {}", request.getAttribute(ERROR_MESSAGE));
+        log.info("ERROR_REQUEST_URI : {}", request.getAttribute(ERROR_REQUEST_URI));
+        log.info("ERROR_SERVLET_NAME : {}", request.getAttribute(ERROR_SERVLET_NAME));
+        log.info("ERROR_STATUS_CODE : {}", request.getAttribute(ERROR_STATUS_CODE));
+        log.info("getDispatcherType = {}", request.getDispatcherType());
     }
 }
