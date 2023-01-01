@@ -1,7 +1,7 @@
 # itemservice-db
 스프링 DB 2편 - 데이터 접근 활용 기술01
 
-### 2023-01-01 추가
+## 2023-01-01 추가
 
 #### 1. JdbcTemplate 주요기능
   - JdbcTemplate : 순서 기반 파라미터 바인딩을 지원
