@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +26,10 @@ public class ApiExceptionController {
     public MemberDto getMember(@PathVariable("id") String id) {
         if (id.equals("ex")) {
             throw new RuntimeException("잘못된 사용자입니다.");
+        }
+
+        if(id.equals("bad")){
+            throw new IllegalArgumentException("잘못된 입력 값");
         }
         return new MemberDto(id, "hello " + id);
     }
