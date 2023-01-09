@@ -15,3 +15,5 @@
     - 예외에 따라 HTTP 상태코드를 지정해줌
 3. DefaultHandlerExceptionResolver
     - 스프링 내부 기본 예외를 처리
+#### 정상코드와 예외처리의 분리
+- @ControllerAdvice + @ExceptionHandler 를사용
