@@ -6,3 +6,12 @@
 2. 스프링 부트를 사용한 오류페이지 설정
 3. API 오류처리
 수정중
+
+### 2023-01-09 추가
+#### 스프링부트가 제공하는 ExceptionResolver (우선순위 순서대로)
+1. ExceptionHandlerExceptionResolver
+    - @ExceptionHandler을 처리. API 예외 처리는 대부분 이 기능으로 해결
+2. ResponseStatusExceptionResolver
+    - HTTP 상태코드를 지정해줌
+3. DefaultHandlerExceptionResolver
+    - 스프링 내부 기본 예외를 처리
