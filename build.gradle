@@ -26,17 +26,21 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'org.projectlombok:lombok:1.18.22'
+	implementation 'org.projectlombok:lombok:1.18.24'
+	implementation 'javax.inject:javax.inject:1'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 
 	//lombok 라이브러리 추가 시작
 	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
 	testCompileOnly 'org.projectlombok:lombok'
-	testAnnotationProcessor 'org.projectlombok:lombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
 	//lombok 라이브러리 추가 끝
+
+
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test'){
 		exclude group: 'org.junit.vintage', module:'junit-vintage-engine'

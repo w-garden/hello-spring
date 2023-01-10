@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
@@ -19,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
 //         this.memberRepository=memberRepository;
 //     }
 //     @Autowired
-//     public void setDiscountPolicy(DiscountPolicy discountPolicy){
+//     public void setDiscountPolicy(@MainDiscountPolicy DiscountPolicy discountPolicy){
 //         this.discountPolicy=discountPolicy;
 //     }
 
@@ -36,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
 */
 
      @Autowired //생성자가 1개면 생략해도됨
-     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy DiscountPolicy) {
+     public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy DiscountPolicy) {
           this.memberRepository = memberRepository;
           this.discountPolicy = DiscountPolicy;
         }
