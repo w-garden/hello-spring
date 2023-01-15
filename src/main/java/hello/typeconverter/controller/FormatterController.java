@@ -30,10 +30,10 @@ public class FormatterController {
     }
     @Data
     static class Form {
-        @NumberFormat(pattern = "###,###")
+        @NumberFormat(pattern = "###,###") //원하는 패턴 지정
         private Integer number;
 
-        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") //날짜,시간 형식 지정
         private LocalDateTime localDateTime;
     }
 }
