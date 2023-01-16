@@ -5,19 +5,46 @@ import hello.itemservice.repository.ItemSearchCond;
 import hello.itemservice.repository.ItemUpdateDto;
 import hello.itemservice.repository.memory.MemoryItemRepository;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+/**
+ * @Transactional 을 테스트코드에서 쓰면 테스트가 끝날 때마다 롤백을 시킨다.
+ */
+@Transactional //아래 주석된 코드를 이 한줄로 처리할 수 있다.
 class ItemRepositoryTest {
 
     @Autowired
     ItemRepository itemRepository;
+
+    /**
+     * 테스트는 다른 테스트와 격리해야 한다.
+     * 테스트는 반복해서 실행할 수 있어야 한다.
+     */
+    /*
+    //Datasource와  PlatformTransactionManager 는 스프링이 자동으로 bean 등록해줌
+    @Autowired
+    PlatformTransactionManager transactionManager;
+    TransactionStatus status;
+    
+    @BeforeEach
+    void beforeEach() {
+        //트랜잭션 시작
+        status = transactionManager.getTransaction(new DefaultTransactionDefinition());
+    }
+    */
+
 
     @AfterEach
     void afterEach() {
@@ -25,6 +52,10 @@ class ItemRepositoryTest {
         if (itemRepository instanceof MemoryItemRepository) {
             ((MemoryItemRepository) itemRepository).clearStore();
         }
+    /*
+        //트랜잭션 롤백
+        transactionManager.rollback(status);
+*/
     }
 
     @Test
