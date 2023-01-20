@@ -8,3 +8,7 @@
   - NamedParameterJdbcTemplate : 이름 기반 파라미터 바인딩을 지정(권장)
   - SimpleJdbcInsert : INSERT SQL을 편리하게 사용가능
   - SimpleJdbcCall : 스토어드 프로시저를 편리하게 호출 할 수 있음
+
+#### 2. mybatis
+#### 3. JPA
+#### 4. SpringDataJPA
