@@ -58,8 +58,8 @@ public class JpaItemRepositoryV1 implements ItemRepository {
             jpql += " i.itemName like concat('%',:itemName,'%')";
             andFlag = true;
         }
-        if (maxPrice!=null){
-            if(andFlag){
+        if (maxPrice != null) {
+            if (andFlag) {
                 jpql += " and";
             }
             jpql += " i.price <= :maxPrice";
@@ -70,7 +70,7 @@ public class JpaItemRepositoryV1 implements ItemRepository {
         if (StringUtils.hasText(itemName)) {
             query.setParameter("itemName", itemName);
         }
-        if(maxPrice != null){
+        if (maxPrice != null) {
             query.setParameter("maxPrice", maxPrice);
         }
         return query.getResultList();
