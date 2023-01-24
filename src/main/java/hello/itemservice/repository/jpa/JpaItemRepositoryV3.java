@@ -17,6 +17,8 @@ import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
+import static hello.itemservice.domain.QItem.*;
+
 @Repository
 @Transactional
 public class JpaItemRepositoryV3 implements ItemRepository {
@@ -54,6 +56,7 @@ public class JpaItemRepositoryV3 implements ItemRepository {
         Integer maxPrice = itemSearch.getMaxPrice();
 
         QItem item = QItem.item;
+
         BooleanBuilder builder = new BooleanBuilder();
         if (StringUtils.hasText(itemName)) {
             builder.and(item.itemName.like("%" + itemName + "%"));
@@ -67,6 +70,7 @@ public class JpaItemRepositoryV3 implements ItemRepository {
                 .from(item)
                 .where(builder)
                 .fetch();
+
         return result;
     }
 
@@ -76,13 +80,11 @@ public class JpaItemRepositoryV3 implements ItemRepository {
         String itemName = cond.getItemName();
         Integer maxPrice = cond.getMaxPrice();
 
-        List<Item> result = query
+        return query
                 .select(item)
                 .from(item)
                 .where(likeItemName(itemName), maxPrice(maxPrice))
                 .fetch();
-
-        return result;
     }
 
     private BooleanExpression likeItemName(String itemName){
@@ -92,7 +94,7 @@ public class JpaItemRepositoryV3 implements ItemRepository {
         return null;
     }
     private BooleanExpression maxPrice(Integer maxPrice){
-        if(maxPrice != null
+        if(maxPrice != null)
         {
             return item.price.loe(maxPrice);
         }
