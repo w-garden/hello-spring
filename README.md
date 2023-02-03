@@ -13,4 +13,3 @@
 #### 3. JPA
 #### 4. SpringDataJPA
 #### 5. QueryDsl
-#### 6.
