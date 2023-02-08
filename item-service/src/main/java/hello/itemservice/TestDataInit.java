@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 @RequiredArgsConstructor
 public class TestDataInit {
     private  final ItemRepository itemRepository = new ItemRepository();
+
     /**
      * 테스트용 데이터 추가
      */
