@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  <configuration>
+     <typeAliases>
+      <typeAlias type="com.naver.vo.BbsVO" alias="bbs" /> <!-- BbsVO 빈클래스 객체명 별칭이름 bbs를 지정.이 bbs를 mybatis
+      매퍼태그에서 참조한다. -->
+     
+      <typeAlias type="com.naver.vo.AdminVO" alias="admin" />    
+      <typeAlias type="com.naver.vo.MemberVO" alias="member" />   
+      <typeAlias type="com.naver.vo.ZipcodeVO" alias="zipcode" />
+      <typeAlias type="com.naver.vo.GongjiVO" alias="gongji" /> 
+      <typeAlias type="com.naver.vo.BoardVO" alias="board" />          
+               
+     </typeAliases>
+  </configuration>
+  

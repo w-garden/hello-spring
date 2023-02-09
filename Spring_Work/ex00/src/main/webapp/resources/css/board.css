@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+body {
+	background-color: #27562b;
+}
+form {
+    margin: 200px auto;
+}
+table {
+	font-size: 20px;
+	border-collapse: collapse;
+	border: 1px solid white; 
+	background-color: #00a0e9;
+	width: 80%;
+}
+
+th, td {
+	font-weight: lighter;
+	border: 1px solid white;
+}
+
+input[type=button], input[type=submit], input[type=reset] {
+	width: 80px;
+	height: 70px;
+	background-color: #ff6666;
+	border: none;
+	font-size: 20px;
+}
+
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover
+	{
+	background-color: #27562b;
+	border: 1px solid white;
+	color: white;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	color: white;
+}

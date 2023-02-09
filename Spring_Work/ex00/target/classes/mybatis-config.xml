@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+  <configuration>
+     <typeAliases>
+       <typeAlias type="net.daum.vo.BoardVO" alias="b" /> <!-- BoardVO 빈클래스 객체 별칭명 b -->
+       <typeAlias type="net.daum.vo.ReplyVO" alias="r" /> <!-- ReplyVO 빈클래스 객체 별칭명 r -->
+       <typeAlias type="net.daum.vo.MessageVO" alias="message" /> 
+       <typeAlias type="net.daum.vo.UserVO" alias="user" /> 
+       
+     </typeAliases>
+  </configuration>
+  

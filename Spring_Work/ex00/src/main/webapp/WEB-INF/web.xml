@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!-- 
+   1. Spring Legacy Project 에서는 서블릿 버전이 2.5이기 때문에 xml 네임스페이스를 2.5에서 3.1로 수정한다.
+   2. 톰캣 7.0 버전 이후부터는  서블릿 3.0이상을 지원하므로 3.0이상부터는 pom.xml에 이진 업로드 라이브러리를 추가하지 않고, 
+          서블릿 자체적인 파일업로드 api를 사용한다.-->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+   id="WebApp_ID" version="3.1">
+
+
+<!--  <web-app version="2.5" xmlns="http://Java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"> -->
+
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/root-context.xml</param-value>
+	</context-param>
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		<!-- 스프링 API의  ContextLoaderListener에 의해서 /WEB-INF/spring/root-context.xml 파일이 로드 된다. 이 파일의 역할은
+		 스프링 jdbc(오라클 연결),서비스 추가를 해서 스프링 AOP를 통한 트랜잭션 적용,
+	     ORM mybatis적용, 모델 DAO설정  까지 이다. 스프링 컨트롤러를 통한 화면에 보여지는 영역인 뷰부분은 없다.(컨트롤과 뷰 설정부분은 없다.)-->
+	</listener>
+
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!--  스프링 API의  DispatcherServlet 서블릿에 의해서 /WEB-INF/spring/appServlet/servlet-context.xml
+		파일이 첫번째로 실행된다. 이 파일의 역할은 스프링 컨트롤러를 통한 뷰페이지 영역이다.-->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		
+		<!-- 이진파일 업로드 설정 -->
+		<multipart-config>
+			<location>C:\\upload</location> <!-- 이진파일(바이너리 파일=> 첨부한 파일) 업로드 서버경로 -->
+			<max-file-size>20971520</max-file-size> <!-- 1mb * 20 => 업로드 되는 파일 최대크기 -->
+			<max-request-size>41973040</max-request-size> <!-- 40MB => 한번에 올릴 수 있는 최대 크기 -->
+			<file-size-threshold>20971520</file-size-threshold> <!-- 20MB => 메모리 사용크기 -->
+		</multipart-config>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+   <!-- method=post 방식일때 전달되는 한글 자료를 안깨지게 한다.  -->
+   <filter>
+     <filter-name>encoding</filter-name>
+     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+     <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+     </init-param>
+   </filter>
+   
+   <filter-mapping>
+     <filter-name>encoding</filter-name>
+     <url-pattern>/*</url-pattern>
+   </filter-mapping>
+   
+</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
