@@ -24,6 +24,10 @@
 ### springtx
 - 스프링 DB 2편 - 데이터 접근 활용 기술_02
 
+
+### basicSecurity
+- Spring Boot 기반으로 개발하는 Spring Security
+
 ### MVC_model
 - 부트캠프 MVC 모델 수업내용
 ### Spring_Work
