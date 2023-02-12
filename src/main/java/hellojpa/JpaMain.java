@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 
 public class JpaMain {
     public static void main(String[] args) {
-        //EntityManagerFactory은 애플리케이션당 1개만 있어야함
+        //EntityManagerFactory은 애플리케이션당 1개만 있어야함.
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
         //EntityManager 여러개 생성가능 : DatabaseConnection 받는것과 비슷함
         EntityManager em = emf.createEntityManager();
