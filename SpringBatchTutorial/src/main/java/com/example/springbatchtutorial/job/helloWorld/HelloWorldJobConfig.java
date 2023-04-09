@@ -1,4 +1,4 @@
-package com.example.springbatchtutorial.job;
+package com.example.springbatchtutorial.job.helloWorld;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
@@ -12,10 +12,13 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * desc : Hello World 를 추력
+ * run : --spring.batch.job.names=helloWorldJob
+ */
 @Configuration
 @RequiredArgsConstructor
 public class HelloWorldJobConfig {
@@ -23,7 +26,7 @@ public class HelloWorldJobConfig {
 
     private final StepBuilderFactory stepBuilderFactory;
     @Bean
-    public Job helloWordJob(){
+    public Job helloWorldJob(){
         return jobBuilderFactory.get("helloWorldJob")
                 .incrementer(new RunIdIncrementer())
                 .start(helloWorldStep())
@@ -44,10 +47,9 @@ public class HelloWorldJobConfig {
             @Override
             public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
                 System.out.println("Hello World Spring Batch");
-
-
                 return RepeatStatus.FINISHED;
             }
         };
+
     }
 }
