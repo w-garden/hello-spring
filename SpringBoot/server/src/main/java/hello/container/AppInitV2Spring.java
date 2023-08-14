@@ -2,8 +2,6 @@ package hello.container;
 
 import hello.spring.HelloConfig;
 import jakarta.servlet.ServletContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
