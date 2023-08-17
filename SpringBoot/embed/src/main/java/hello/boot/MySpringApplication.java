@@ -1,5 +1,7 @@
 package hello.boot;
 
+import hello.servlet.HelloServlet;
+import hello.spring.HelloConfig;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.connector.Connector;
@@ -16,7 +18,7 @@ public class MySpringApplication {
 
         Tomcat tomcat = new Tomcat();
         Connector connector = new Connector();
-        tomcat.setPort(8080);
+        tomcat.setPort(7070);
         tomcat.setConnector(connector);
 
         AnnotationConfigWebApplicationContext appContext = new AnnotationConfigWebApplicationContext();

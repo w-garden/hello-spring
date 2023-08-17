@@ -5,9 +5,8 @@ import hello.boot.MySpringBootApplication;
 
 @MySpringBootApplication
 public class MySpringBootMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         System.out.println("MySpringBootMain.main");
-
         MySpringApplication.run(MySpringBootMain.class, args);
 
     }
