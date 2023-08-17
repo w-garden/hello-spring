@@ -1,5 +1,6 @@
 package hello.boot;
 
+
 import org.springframework.context.annotation.ComponentScan;
 
 import java.lang.annotation.*;
@@ -9,5 +10,4 @@ import java.lang.annotation.*;
 @Documented
 @ComponentScan
 public @interface MySpringBootApplication {
-
 }
