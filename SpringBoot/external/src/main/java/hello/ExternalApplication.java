@@ -8,6 +8,8 @@ public class ExternalApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ExternalApplication.class, args);
+
     }
+
 
 }
