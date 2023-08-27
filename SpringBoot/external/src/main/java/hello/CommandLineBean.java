@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Slf4j
-//@Component
+@Component
 public class CommandLineBean {
     private final ApplicationArguments arguments;
 
