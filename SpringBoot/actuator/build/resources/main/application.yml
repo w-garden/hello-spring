@@ -18,6 +18,11 @@ management:
     web:
       exposure:
         include: "*"
+      base-path: /actuator
+#      base-path: /manage
+  server:
+#    port: 9092
+    port: 8080
 info:
   app:
     name: hello-actuator
@@ -26,3 +31,7 @@ info:
 logging:
   level:
     hello.controller: debug
+server:
+  tomcat:
+    mbeanregistry:
+      enabled: true
