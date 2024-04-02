@@ -4,13 +4,12 @@ import hello.advanced.trace.TraceId;
 import hello.advanced.trace.TraceStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import static hello.advanced.trace.PrefixConstant.*;
 
 @Slf4j
 @Component
 public class HelloTraceV1 {
-    private static final String START_PREFIX = "-->";
-    private static final String COMPLETE_PREFIX = "<--";
-    private static final String EX_PREFIX = "<X-";
+
     public TraceStatus begin(String message) {
         TraceId traceId = new TraceId();
         Long startTImeMs = System.currentTimeMillis();

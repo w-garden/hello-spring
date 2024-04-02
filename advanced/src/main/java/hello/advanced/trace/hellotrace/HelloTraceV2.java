@@ -5,12 +5,12 @@ import hello.advanced.trace.TraceStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import static hello.advanced.trace.PrefixConstant.*;
+
 @Slf4j
 @Component
 public class HelloTraceV2 {
-    private static final String START_PREFIX = "-->";
-    private static final String COMPLETE_PREFIX = "<--";
-    private static final String EX_PREFIX = "<X-";
+
 
     public TraceStatus begin(String message) {
         TraceId traceId = new TraceId();
@@ -26,10 +26,10 @@ public class HelloTraceV2 {
         printLog(message, nextId);
         return new TraceStatus(nextId, startTImeMs, message);
     }
-
     private void printLog(String message, TraceId nextId) {
         log.info("[{}] {}{}", nextId.getId(), addSpace(START_PREFIX, nextId.getLevel()), message);
     }
+
 
     public void end(TraceStatus status) {
         complete(status, null);
