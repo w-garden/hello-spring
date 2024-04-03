@@ -19,11 +19,13 @@ public class OrderControllerV2 {
             status = trace.begin("OrderController.request()");
             orderService.orderItem(status.getTraceId(), itemId);
             trace.end(status);
-            return "ok";
+
         } catch (Exception e) {
             trace.exception(status, e);
             throw e;
         }
+
+        return "ok";
     }
 
 }

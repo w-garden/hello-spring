@@ -6,7 +6,6 @@ public class Utility {
             Thread.sleep(i);
         } catch (InterruptedException e) {
             e.printStackTrace();
-            ;
         }
     }
 }
