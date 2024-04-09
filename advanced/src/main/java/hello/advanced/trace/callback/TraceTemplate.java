@@ -25,6 +25,5 @@ public class TraceTemplate {
             trace.exception(status, e);
             throw e;
         }
-
-
-    }}
+    }
+}
