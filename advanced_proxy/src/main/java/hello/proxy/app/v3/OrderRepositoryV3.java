@@ -1,9 +1,12 @@
-package hello.proxy.app.v1;
+package hello.proxy.app.v3;
+
+
+import org.springframework.stereotype.Repository;
 
 import static hello.proxy.util.Utility.sleep;
 
-public class OrderRepositoryV1Impl implements OrderRepositoryV1 {
-    @Override
+@Repository
+public class OrderRepositoryV3 {
     public void save(String itemId) {
         //저장 로직
         if (itemId.equals("ex")) {
