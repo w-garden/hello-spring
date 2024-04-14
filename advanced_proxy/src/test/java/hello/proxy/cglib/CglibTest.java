@@ -19,6 +19,8 @@ public class CglibTest {
         ConcreteService proxy = (ConcreteService) enhancer.create();
         log.info("targetClass={}", target.getClass());
         log.info("proxyClass={}", proxy.getClass());
+
+        proxy.call();
     }
 
 }
