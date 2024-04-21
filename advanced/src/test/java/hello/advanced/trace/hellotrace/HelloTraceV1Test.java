@@ -4,7 +4,6 @@ import hello.advanced.trace.TraceStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootApplication
 class HelloTraceV1Test {

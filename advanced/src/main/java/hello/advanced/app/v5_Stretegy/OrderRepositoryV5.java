@@ -1,11 +1,8 @@
-package hello.advanced.app.v5;
+package hello.advanced.app.v5_Stretegy;
 
 import hello.advanced.trace.callback.TraceCallback;
 import hello.advanced.trace.callback.TraceTemplate;
 import hello.advanced.trace.logtrace.LogTrace;
-import hello.advanced.trace.template.AbstractTemplate;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.stereotype.Repository;
 
 import static hello.advanced.util.Utility.sleep;
