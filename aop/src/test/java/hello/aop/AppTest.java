@@ -9,8 +9,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 
 @Slf4j
+//@Import(AspectV1.class)
+//@Import(AspectV2.class)
+@Import(AspectV3.class)
 @SpringBootTest
 public class AppTest {
     @Autowired
