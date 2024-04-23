@@ -1,4 +1,4 @@
-package hello.aop;
+package hello.aop.order.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,14 +12,14 @@ public class PointCuts {
     public void allOrder() {
     }
 
-    //타입 패턴이 Service
+    //타입 패턴이 *Service
     @Pointcut("execution(* *..*Service.*(..))")
-    private void allService() {
+    public void allService() {
     }
 
     //allOrder() && allService()
     @Pointcut("allOrder() && allService()")
-    private void orderAndService() {
+    public void orderAndService() {
     }
 
 }
