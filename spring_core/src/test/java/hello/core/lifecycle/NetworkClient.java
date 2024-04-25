@@ -1,9 +1,10 @@
 package hello.core.lifecycle;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 //스프링 빈 생명주기 관리 방법
 //1.인터페이스 InitializingBean, DisposableBean

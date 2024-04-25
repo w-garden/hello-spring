@@ -22,11 +22,11 @@ public class AppConfig {
         return new MemberServiceImpl(memberRepository());
     }
     @Bean
-    //생성자를 통한 주입
+//    생성자를 통한 주입
     public OrderService orderService() {
         System.out.println("call AppConfig.orderService");
-//        return new OrderServiceImpl(memberRepository(), discountPolicy());
-        return null;
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+//        return null;
     }
 
     @Bean
