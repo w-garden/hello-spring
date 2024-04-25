@@ -40,7 +40,6 @@ public class AppTest {
     @Test
     public void exception() {
         Assertions.assertThatThrownBy(() -> orderService.order("ex")).isInstanceOf(IllegalStateException.class);
-
     }
 
 }
