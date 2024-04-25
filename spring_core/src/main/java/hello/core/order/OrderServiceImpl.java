@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-//@RequiredArgsConstructor //final 필드로 생성자를 만들어주는 롬복 annotation
+@RequiredArgsConstructor //final 필드로 생성자를 만들어주는 롬복 annotation
 public class OrderServiceImpl implements OrderService {
      private final MemberRepository memberRepository;
      private final DiscountPolicy discountPolicy;
@@ -36,11 +36,11 @@ public class OrderServiceImpl implements OrderService {
       }
 */
 
-     @Autowired //생성자가 1개면 생략해도됨
-     public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy DiscountPolicy) {
-          this.memberRepository = memberRepository;
-          this.discountPolicy = DiscountPolicy;
-        }
+//     @Autowired //생성자가 1개면 생략해도됨
+//     public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy DiscountPolicy) {
+//          this.memberRepository = memberRepository;
+//          this.discountPolicy = DiscountPolicy;
+//        }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
