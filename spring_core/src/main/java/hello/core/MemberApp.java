@@ -9,9 +9,10 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class MemberApp {
     public static void main(String[] args) {
 
+
 //        AppConfig appConfig = new AppConfig();
 //        MemberService memberService = appConfig.memberService();
-
+        /* 위 코드를 아래 스프링 DI 코드로 전환 */
 
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class); //스프링 컨테이너를 뜻함. //AppConfig.class -> appconfig 의 설정 정보를 스프링 컨테이너에서 관리해줌
         MemberService memberService = applicationContext.getBean("memberService", MemberService.class);//기본적으로 메서드이름으로 컨테이너에 등록됨
