@@ -16,56 +16,58 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ApplicationContextExtendFindTest {
-    AnnotationConfigApplicationContext ac =new AnnotationConfigApplicationContext(TestConfig.class);
+    AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(TestConfig.class);
 
     @Test
     @DisplayName("부모 타입으로 조회시, 자식이 둘 이상 있으면, 중복 오류가 발생한다")
-    void findBeanParentTypeDuplicate(){
-        assertThrows(NoUniqueBeanDefinitionException.class, ()-> ac.getBean(DiscountPolicy.class));
+    void findBeanParentTypeDuplicate() {
+        assertThrows(NoUniqueBeanDefinitionException.class, () -> ac.getBean(DiscountPolicy.class));
     }
 
     @Test
     @DisplayName("부모 타입으로 조회시, 자식이 둘 이상 있으면, 빈 이름을 지정하면 된다.")
-    void findBeanByParentBeanName(){
+    void findBeanByParentBeanName() {
         RateDiscountPolicy rateDiscountPolicy = ac.getBean("rateDiscountPolicy", RateDiscountPolicy.class);
         assertThat(rateDiscountPolicy).isInstanceOf(RateDiscountPolicy.class);
     }
 
     @Test
     @DisplayName("특정 하위 타입으로 조회")
-    void findBeanSubType(){
-        RateDiscountPolicy rateDiscountPolicy=ac.getBean(RateDiscountPolicy.class);
+    void findBeanSubType() {
+        RateDiscountPolicy rateDiscountPolicy = ac.getBean(RateDiscountPolicy.class);
         assertThat(rateDiscountPolicy).isInstanceOf(RateDiscountPolicy.class);
     }
 
 
     @Test
     @DisplayName("부모타입으로 모두 조회하기")
-    void findAllBeanByParent(){
+    void findAllBeanByParent() {
         Map<String, DiscountPolicy> beansOfType = ac.getBeansOfType(DiscountPolicy.class);
 
         assertThat(beansOfType.size()).isEqualTo(2);
         for (String key : beansOfType.keySet()) {
-            System.out.println("key = " + key + " value= "+ beansOfType.get(key));
+            System.out.println("key = " + key + " value= " + beansOfType.get(key));
         }
     }
 
     @Test
     @DisplayName("부모 타입으로 모두 조회하기 -Object")
-    void findAllBeanByObjectType(){
+    void findAllBeanByObjectType() {
         Map<String, Object> beansOfType = ac.getBeansOfType(Object.class);
         for (String key : beansOfType.keySet()) {
-            System.out.println("key ="+ key+ " value = "+ beansOfType.values());
+            System.out.println("key =" + key + " value = " + beansOfType.values());
         }
     }
+
     @Configuration
-    static class TestConfig{
+    static class TestConfig {
         @Bean
-        public DiscountPolicy rateDiscountPolicy(){
+        public DiscountPolicy rateDiscountPolicy() {
             return new RateDiscountPolicy();
         }
+
         @Bean
-        public DiscountPolicy fixDiscountPolicy(){
+        public DiscountPolicy fixDiscountPolicy() {
             return new FixDiscountPolicy();
         }
     }

@@ -1,6 +1,5 @@
 package hello.core.lifecycle;
 
-import ch.qos.logback.core.spi.LifeCycle;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

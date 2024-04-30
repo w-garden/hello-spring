@@ -14,8 +14,8 @@ public class OrderApp {
 //        AppConfig appConfig = new AppConfig();
 //        MemberService memberService = appConfig.memberService();
 //        OrderService orderService = appConfig.orderService();
-        /* 위 코드를 스프링 DI 코드로 전환 */
 
+        /* 위 코드를 스프링 DI 코드로 전환 */
         ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
         MemberService memberService = ac.getBean("memberService", MemberService.class);
         OrderService orderService = ac.getBean("orderService", OrderService.class);
