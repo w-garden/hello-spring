@@ -4,9 +4,9 @@ import hello.servlet.web.frontcontroller.ModelView;
 import hello.servlet.web.frontcontroller.v4.ControllerV4;
 import hello.servlet.web.frontcontroller.v5.MyHandlerAdapter;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
