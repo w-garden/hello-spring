@@ -13,12 +13,12 @@ import java.io.IOException;
 
 @WebServlet(name ="mvcMemberSaveServlet", urlPatterns = "/servlet-mvc/members/save")
 public class MvcMemberSaveServlet extends HttpServlet {
-    private MemberRepository memberRepository = MemberRepository.getInstance();
+    private final MemberRepository memberRepository = MemberRepository.getInstance();
 
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        int age = Integer.parseInt(req.getParameter("age"));
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String username = request.getParameter("username");
+        int age = Integer.parseInt(request.getParameter("age"));
 
         Member member = new Member(username, age);
         System.out.println("member = " + member);
@@ -26,11 +26,11 @@ public class MvcMemberSaveServlet extends HttpServlet {
         memberRepository.save(member);
         
         //Model에 데이터를 보관
-        req.setAttribute("member",member);
+        request.setAttribute("member",member);
 
         String viewPath = "/WEB-INF/views/save-result.jsp";
-        RequestDispatcher dispatcher = req.getRequestDispatcher(viewPath);
-        dispatcher.forward(req, resp);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
+        dispatcher.forward(request, response);
         
     }
 }

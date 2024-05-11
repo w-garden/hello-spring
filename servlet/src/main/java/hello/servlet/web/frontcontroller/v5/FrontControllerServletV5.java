@@ -16,13 +16,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name="frontControllerServletV5", urlPatterns = "/front-controller/v5/*")
+@WebServlet(name = "frontControllerServletV5", urlPatterns = "/front-controller/v5/*")
 public class FrontControllerServletV5 extends HttpServlet {
 
     private final Map<String, Object> hanlderMappingMap = new HashMap<>();
@@ -33,7 +34,7 @@ public class FrontControllerServletV5 extends HttpServlet {
         initHandlerAdapters();
     }
 
-    private void initHandlerMappingMap(){
+    private void initHandlerMappingMap() {
         hanlderMappingMap.put("/front-controller/v5/v3/members/new-form", new MemberFormControllerV3());
         hanlderMappingMap.put("/front-controller/v5/v3/members/save", new MemberSaveControllerV3());
         hanlderMappingMap.put("/front-controller/v5/v3/members", new MemberListControllerV3());
@@ -42,7 +43,8 @@ public class FrontControllerServletV5 extends HttpServlet {
         hanlderMappingMap.put("/front-controller/v5/v4/members/save", new MemberSaveControllerV4());
         hanlderMappingMap.put("/front-controller/v5/v4/members", new MemberListControllerV4());
     }
-    private void initHandlerAdapters(){
+
+    private void initHandlerAdapters() {
         handlerAdapters.add(new ControllerV3HandlerAdapter()); //V3어댑터
         handlerAdapters.add(new ControllerV4HandlerAdapter()); //V4어댑터
     }
@@ -53,7 +55,7 @@ public class FrontControllerServletV5 extends HttpServlet {
 
         Object handler = getHandler(request); //핸들러 찾고
 
-        if(handler == null){
+        if (handler == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
@@ -71,8 +73,8 @@ public class FrontControllerServletV5 extends HttpServlet {
     }
 
     private MyHandlerAdapter getHandlerAdapter(Object handler) {
-        for(MyHandlerAdapter adapter : handlerAdapters){
-            if(adapter.supports(handler)){
+        for (MyHandlerAdapter adapter : handlerAdapters) {
+            if (adapter.supports(handler)) {
                 return adapter;
             }
         }
