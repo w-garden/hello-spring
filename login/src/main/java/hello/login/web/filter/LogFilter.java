@@ -1,10 +1,10 @@
 package hello.login.web.filter;
 
 
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 public class LogFilter implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         log.info("log filter init");
     }
 
@@ -20,7 +20,7 @@ public class LogFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         log.info("log filter doFilter");
 
-        //ServletRequest 는 HttpServletRequest의 부모 interface
+        //ServletRequest 는 HttpServletRequest 의 부모 interface
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String requestURI = httpRequest.getRequestURI();
 
@@ -28,7 +28,7 @@ public class LogFilter implements Filter {
 
         try {
             log.info("REQUEST [{}][{}]", uuid, requestURI);
-            chain.doFilter(request, response); //다음 필터 호출하기. 없으면 서블릿 호출
+            chain.doFilter(request, response); //다음 필터 호출하기. 이후 필터가 없으면 서블릿 호출
         } catch (Exception e) {
             throw e;
         } finally {

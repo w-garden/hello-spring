@@ -4,6 +4,11 @@ import hello.login.domain.login.LoginService;
 import hello.login.domain.member.Member;
 import hello.login.web.SessionConst;
 import hello.login.web.session.SessionManager;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -13,11 +18,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -85,9 +85,7 @@ public class LoginController {
         return "redirect:/";
     }
 
-    /**
-     * HttpSession
-     */
+    // HttpSession
 //    @PostMapping("/login")
     public String loginV3(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request) {
         if (bindingResult.hasErrors()) {
@@ -111,9 +109,7 @@ public class LoginController {
         return "redirect:/";
     }
 
-    /**
-     * 로그인 이후 redirect 처리
-     */
+    // 로그인 이후 redirect 처리
     @PostMapping("/login")
     public String loginV4(
             @Valid @ModelAttribute LoginForm form, BindingResult bindingResult,
@@ -132,7 +128,6 @@ public class LoginController {
         }
 
         //로그인 성공처리
-
         //세션이 있으면 세션반환
         HttpSession session = request.getSession();
         //세션에 로그인 회원 정보 보관
