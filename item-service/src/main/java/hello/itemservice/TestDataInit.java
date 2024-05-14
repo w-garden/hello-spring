@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class TestDataInit {
     private  final ItemRepository itemRepository = new ItemRepository();
 
-    /**
+    /*
      * 테스트용 데이터 추가
      */
     @PostConstruct

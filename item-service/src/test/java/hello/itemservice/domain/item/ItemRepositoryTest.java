@@ -1,27 +1,24 @@
 package hello.itemservice.domain.item;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 class ItemRepositoryTest {
 
-    ItemRepository itemRepository =new ItemRepository();
+    ItemRepository itemRepository = new ItemRepository();
 
     @AfterEach
-    void afterEach(){
+    void afterEach() {
         itemRepository.clearStore();
     }
 
     @Test
-    void save(){
+    void save() {
         //given
         Item item = new Item("itemA", 10000, 10);
 
@@ -32,11 +29,12 @@ class ItemRepositoryTest {
         Item findItem = itemRepository.findById(item.getId());
         assertThat(findItem).isEqualTo(savedItem);
     }
+
     @Test
     void findAll() {
         //given
-        Item itemA = new Item("itemA", 10000, 2);
-        Item itemB = new Item("itemB", 20000, 5);
+        Item itemA = new Item("itemA", 10000, 10);
+        Item itemB = new Item("itemB", 20000, 20);
 
         itemRepository.save(itemA);
         itemRepository.save(itemB);
@@ -49,8 +47,9 @@ class ItemRepositoryTest {
         assertThat(result).contains(itemA, itemB);
 
     }
+
     @Test
-    void updateItem(){
+    void updateItem() {
         //given
         Item item = new Item("itemA", 10000, 10);
 
@@ -59,13 +58,13 @@ class ItemRepositoryTest {
 
         //when
         Item updateParam = new Item("itemB", 20000, 20);
-        itemRepository.update(itemId,updateParam);
+        itemRepository.update(itemId, updateParam);
 
-        Item findItem = itemRepository.findById(itemId);
         //then
+        Item findItem = itemRepository.findById(itemId);
+
         assertThat(findItem.getItemName()).isEqualTo(updateParam.getItemName());
         assertThat(findItem.getPrice()).isEqualTo(updateParam.getPrice());
         assertThat(findItem.getQuantity()).isEqualTo(updateParam.getQuantity());
     }
-
 }

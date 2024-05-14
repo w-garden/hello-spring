@@ -20,9 +20,11 @@ public class ItemRepository {
         store.put(item.getId(), item);
         return item;
     }
+
     public Item findById(Long id){
         return store.get(id);
     } //id 기준조회
+
     public List<Item> findAll(){ //전체 조회
         return new ArrayList<>(store.values()); //한번 감싸서 넘김
     }
