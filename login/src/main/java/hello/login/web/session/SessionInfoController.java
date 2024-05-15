@@ -14,19 +14,18 @@ public class SessionInfoController {
     @GetMapping("/session-info")
     public String sessionInfo(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (session == null) {
-            return "세션이 없습니다";
-        }
+        if (session == null) return "세션이 없습니다";
 
         //세션 데이터 출력
         session.getAttributeNames().asIterator()
-                .forEachRemaining(name -> log.info("session name={}, value={}",
-                        name, session.getAttribute(name)));
-        log.info("sessionId={}", session.getId());
-        log.info("getMaxInactiveInterval={}", session.getMaxInactiveInterval());
-        log.info("getCreationTime={}", new Date(session.getCreationTime()));
-        log.info("getLastAccessedTime={}",new Date(session.getLastAccessedTime()));
-        log.info("isNew ={}", session.isNew());
+                .forEachRemaining(name -> log.info("session name={}, value={}", name, session.getAttribute(name)));
+
+        log.info("sessionId = {}", session.getId());
+        log.info("getMaxInactiveInterval = {}", session.getMaxInactiveInterval());
+        log.info("getCreationTime = {}", new Date(session.getCreationTime()));
+        log.info("getLastAccessedTime = {}", new Date(session.getLastAccessedTime()));
+        log.info("isNew = {}", session.isNew());
+
 
         return "세션 출력";
     }

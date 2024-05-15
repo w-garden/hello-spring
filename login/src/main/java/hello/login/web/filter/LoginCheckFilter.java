@@ -1,6 +1,5 @@
 package hello.login.web.filter;
 
-import hello.login.web.SessionConst;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
