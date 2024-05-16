@@ -1,6 +1,5 @@
 package hello.itemservice.validation;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.validation.DefaultMessageCodesResolver;
 import org.springframework.validation.MessageCodesResolver;
@@ -23,7 +22,6 @@ public class MessageCodeResolverTest {
 
     /**
      * DefaultMessageCodesResolver 의 기본 메시지 생성 규칙
-     * <p>
      * 객체 오류의 경우 다음 순서로 2가지 생성
      * 1. : code + "." + object name
      * 2. : code
@@ -42,7 +40,8 @@ public class MessageCodeResolverTest {
      * 1. "typeMismatch.user.age"
      * 2. "typeMismatch.age"
      * 3. "typeMismatch.int"
-     * 4. "typeMismatch"
+     * 4. "typeMismatch"     * <p>
+
      */
 
     @Test
