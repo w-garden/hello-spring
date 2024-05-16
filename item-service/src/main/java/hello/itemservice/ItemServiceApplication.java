@@ -14,7 +14,7 @@ public class ItemServiceApplication  {
 	}
 
 	/** 
-	 * ItemValidator 검증기를 전역적으로 사용
+	 * ItemValidator 검증기를 Global하게 사용
 	 *
 	 * implements WebMvcConfigurer
 	 */

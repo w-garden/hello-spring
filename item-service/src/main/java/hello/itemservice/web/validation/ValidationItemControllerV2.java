@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -176,10 +177,10 @@ public class ValidationItemControllerV2 {
 
 
         //검증 로직
-//        ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "itemName","required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "itemName", "required");
 //        아래 코드와 같은 기능
-        if (!StringUtils.hasText(item.getItemName()))
-            bindingResult.rejectValue("itemName", "required");
+      /*  if (!StringUtils.hasText(item.getItemName()))
+            bindingResult.rejectValue("itemName", "required");*/
 
 
         if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000)
@@ -207,6 +208,9 @@ public class ValidationItemControllerV2 {
         return "redirect:/validation/v2/items/{itemId}";
     }
 
+    /**
+    검증 로직을 ItemValidator 클래스에 별도로 분리
+     */
     //    @PostMapping("/add")
     public String addItemV5(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         itemValidator.validate(item, bindingResult);

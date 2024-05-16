@@ -41,15 +41,14 @@ public class MessageCodeResolverTest {
      * 2. "typeMismatch.age"
      * 3. "typeMismatch.int"
      * 4. "typeMismatch"     * <p>
-
      */
 
     @Test
     void messageCodesResolverField() {
         String[] messageCodes = codesResolver.resolveMessageCodes("required", "item", "itemName", String.class);
-        for (String messageCode : messageCodes) {
+        for (String messageCode : messageCodes)
             System.out.println("messageCode = " + messageCode);
-        }
+
         assertThat(messageCodes).containsExactly(
                 "required.item.itemName",
                 "required.itemName",
