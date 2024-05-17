@@ -11,26 +11,24 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.servlet.DispatcherType;
-import javax.servlet.Filter;
+import jakarta.servlet.DispatcherType;
+import jakarta.servlet.Filter;
+
 import java.util.List;
 
 @Configuration
-public class WebConfig implements WebMvcConfigurer
-{
+public class WebConfig implements WebMvcConfigurer {
+    //인터셉터
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LogInterceptor())
                 .order(1)
                 .addPathPatterns("/**")
-                .excludePathPatterns(
-                        "/css/**", "/*.ico"
-                        , "/error"
-                        , "/error-page/**"
-                );
+                .excludePathPatterns("/css/**", "/*.ico", "/error", "/error-page/**");
     }
 
-    //    @Bean
+    //필터
+//    @Bean
     public FilterRegistrationBean logFilter() {
         FilterRegistrationBean<Filter> filterRegistrationBean = new
                 FilterRegistrationBean<>();
@@ -44,7 +42,7 @@ public class WebConfig implements WebMvcConfigurer
     }
 
     /**
-     *  기본 설정을 유지하면서 추가
+     * 기본 설정을 유지하면서 추가
      */
     @Override
     public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {

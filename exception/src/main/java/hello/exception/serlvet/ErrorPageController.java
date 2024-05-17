@@ -7,11 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
+
+import static jakarta.servlet.RequestDispatcher.*;
 
 /**
  * 오류 화면을 보여주기 위한 컨트롤러
@@ -21,12 +22,12 @@ import java.util.Map;
 public class ErrorPageController {
 
     //RequestDispatcher 상수로 정의되어 있음
-    public static final String ERROR_EXCEPTION = "javax.servlet.error.exception"; //예외
-    public static final String ERROR_EXCEPTION_TYPE = "javax.servlet.error.exception_type"; //예외 타입
-    public static final String ERROR_MESSAGE= "javax.servlet.error.message"; //오류 메시지
-    public static final String ERROR_REQUEST_URI= "javax.servlet.error.request_uri"; //클라이언트 요청 URI
-    public static final String ERROR_SERVLET_NAME= "javax.servlet.error.servlet_name"; //오류가 발생한 서블릿 이름
-    public static final String ERROR_STATUS_CODE= "javax.servlet.error.status_code"; //HTTP 상태 코드
+//    public static final String ERROR_EXCEPTION = "javax.servlet.error.exception"; //예외
+//    public static final String ERROR_EXCEPTION_TYPE = "javax.servlet.error.exception_type"; //예외 타입
+//    public static final String ERROR_MESSAGE= "javax.servlet.error.message"; //오류 메시지
+//    public static final String ERROR_REQUEST_URI= "javax.servlet.error.request_uri"; //클라이언트 요청 URI
+//    public static final String ERROR_SERVLET_NAME= "javax.servlet.error.servlet_name"; //오류가 발생한 서블릿 이름
+//    public static final String ERROR_STATUS_CODE= "javax.servlet.error.status_code"; //HTTP 상태 코드
 
 
     @RequestMapping("/error-page/404")
@@ -51,7 +52,7 @@ public class ErrorPageController {
         result.put("status", request.getAttribute(ERROR_STATUS_CODE));
         result.put("message", ex.getMessage());
 
-        Integer statusCode = (Integer) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+        Integer statusCode = (Integer) request.getAttribute(ERROR_STATUS_CODE);
 
 
         return new ResponseEntity<>(result, HttpStatus.valueOf(statusCode));
@@ -70,3 +71,7 @@ public class ErrorPageController {
         log.info("getDispatcherType = {}", request.getDispatcherType());
     }
 }
+
+
+
+

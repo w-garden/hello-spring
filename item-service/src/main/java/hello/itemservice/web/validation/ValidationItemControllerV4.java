@@ -56,7 +56,6 @@ public class ValidationItemControllerV4 {
             }
         }
 
-
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
             return "validation/v4/addForm";
